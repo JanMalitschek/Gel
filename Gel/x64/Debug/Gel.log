@@ -1,0 +1,3 @@
+﻿  Application.cpp
+     Bibliothek "C:\Users\Aprikosis\source\repos\GelEngineLibraryDevelopment\x64\Debug\Gel.lib" und Objekt "C:\Users\Aprikosis\source\repos\GelEngineLibraryDevelopment\x64\Debug\Gel.exp" werden erstellt.
+LINK : fatal error LNK1561: Einstiegspunkt muss definiert werden.

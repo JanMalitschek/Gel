@@ -1,0 +1,5 @@
+﻿  SandboxMain.cpp
+SandboxMain.obj : error LNK2019: Verweis auf nicht aufgelöstes externes Symbol ""__declspec(dllimport) public: __cdecl Gel::Application::Application(void)" (__imp_??0Application@Gel@@QEAA@XZ)" in Funktion ""public: __cdecl SandboxApp::SandboxApp(void)" (??0SandboxApp@@QEAA@XZ)".
+SandboxMain.obj : error LNK2019: Verweis auf nicht aufgelöstes externes Symbol ""__declspec(dllimport) public: virtual __cdecl Gel::Application::~Application(void)" (__imp_??1Application@Gel@@UEAA@XZ)" in Funktion ""public: virtual __cdecl SandboxApp::~SandboxApp(void)" (??1SandboxApp@@UEAA@XZ)".
+SandboxMain.obj : error LNK2019: Verweis auf nicht aufgelöstes externes Symbol ""__declspec(dllimport) public: void __cdecl Gel::Application::Run(void)" (__imp_?Run@Application@Gel@@QEAAXXZ)" in Funktion "main".
+C:\Users\Aprikosis\source\repos\GelEngineLibraryDevelopment\x64\Debug\Sandbox.exe : fatal error LNK1120: 3 nicht aufgelöste Externe

@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "EngineHandler.h"
 
 namespace Gel {
 
@@ -12,8 +13,14 @@ namespace Gel {
 	}
 
 	void Application::Run() {
-		while (true) {
-
+		EngineHandler::InitEngine();
+		OnStart();
+		while (!glfwWindowShouldClose(EngineHandler::window)) {
+			glfwPollEvents();
+			OnUpdate();
+			glfwSwapBuffers(EngineHandler::window);
 		}
+		OnTerminate();
+		glfwTerminate();
 	}
 }

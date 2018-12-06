@@ -7,6 +7,9 @@
     <Filter Include="src\Gel">
       <UniqueIdentifier>{9b510e1f-58f0-495a-9f2c-2f68e312fb49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Gel\ResourceClasses">
+      <UniqueIdentifier>{c24f783b-927b-4eec-a536-17fc4d395396}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -21,10 +24,54 @@
     <ClInclude Include="EntryPoint.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="EngineHandler.h">
+      <Filter>src\Gel</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSettings.h">
+      <Filter>src\Gel</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>src\Gel</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
       <Filter>src\Gel</Filter>
     </ClCompile>
+    <ClCompile Include="EngineHandler.cpp">
+      <Filter>src\Gel</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSettings.cpp">
+      <Filter>src\Gel</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>src\Gel</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultShader.cpp" />
   </ItemGroup>
 </Project>

@@ -45,7 +45,33 @@
     <ClInclude Include="Shader.h">
       <Filter>src\Gel\ResourceClasses</Filter>
     </ClInclude>
-    <ClInclude Include="DefaultShader.h" />
+    <ClInclude Include="DefaultShader.h">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>src\Gel</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>src\Gel</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>src\Gel</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureContainer.h">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelContainer.h">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderContainer.h">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -72,6 +98,32 @@
     <ClCompile Include="Shader.cpp">
       <Filter>src\Gel\ResourceClasses</Filter>
     </ClCompile>
-    <ClCompile Include="DefaultShader.cpp" />
+    <ClCompile Include="DefaultShader.cpp">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>src\Gel</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>src\Gel</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>src\Gel</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelContainer.cpp">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureContainer.cpp">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderContainer.cpp">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

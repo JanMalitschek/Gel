@@ -11,6 +11,7 @@
 
 namespace Gel {
 	class GEL_API Texture {
+	public:
 		Texture(GLuint ID, std::string Name, unsigned int width, unsigned int height);
 		Texture();
 		int GetWidth();

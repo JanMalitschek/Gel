@@ -4,8 +4,31 @@ namespace Gel {
 
 	DefaultShader::DefaultShader()
 	{
-		std::string vertexCode;
-		std::string fragmentCode;
+		std::string vertexCode = "#version 440 core\n"
+			"layout(location = 0) in vec3 position;\n"
+			"layout(location = 1) in vec3 normal;\n"
+			"layout(location = 2) in vec2 texCoords;\n"
+
+			"uniform mat4 model;\n"
+			"uniform mat4 view;\n"
+			"uniform mat4 projection;\n"
+
+			"out vec2 TexCoords;\n"
+
+			"void main()\n"
+			"{\n"
+			"	gl_Position = projection * view * model * vec4(position, 1.0f);\n"
+			"	TexCoords = texCoords;\n"
+			"};";
+		std::string fragmentCode = "#version 440 core\n"
+			"out vec4 color;\n"
+
+			"in vec2 TexCoords;\n"
+
+			"void main()\n"
+			"{\n"
+			"	color = vec4(1.0, 0.0, 1.0, 1.0);\n"
+			"}";
 
 		const GLchar* vShaderCode = vertexCode.c_str();
 		const GLchar * fShaderCode = fragmentCode.c_str();
@@ -51,7 +74,7 @@ namespace Gel {
 		glDeleteShader(vertex);
 		glDeleteShader(fragment);
 	}
-	void Shader::Use()
+	void DefaultShader::Use()
 	{
 		glUseProgram(this->Program);
 	}

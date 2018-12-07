@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "EngineHandler.h"
+#include "System.h"
 
 namespace Gel {
 
@@ -17,6 +18,7 @@ namespace Gel {
 		OnStart();
 		while (!glfwWindowShouldClose(EngineHandler::window)) {
 			glfwPollEvents();
+			System::Run();
 			OnUpdate();
 			glfwSwapBuffers(EngineHandler::window);
 		}

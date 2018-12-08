@@ -25,9 +25,12 @@ namespace Gel {
 		virtual void PassValues();
 		void SetShader(Shader* shader);
 		void UseShader();
+		GLuint GetProgram();
 		Shader* shader;
 	private:
 		DefaultShader defaultShader;
+	protected:
+		void PassTexture(const char* uniformName, GLuint texture, GLenum activeTexture, int activeTextureID);
 	};
 
 }

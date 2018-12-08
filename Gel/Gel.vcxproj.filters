@@ -10,6 +10,9 @@
     <Filter Include="src\Gel\ResourceClasses">
       <UniqueIdentifier>{c24f783b-927b-4eec-a536-17fc4d395396}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Gel\Components">
+      <UniqueIdentifier>{c389c3f5-ec0d-4fac-a259-d8d132956456}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -72,6 +75,15 @@
     <ClInclude Include="ShaderContainer.h">
       <Filter>src\Gel\ResourceClasses</Filter>
     </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>src\Gel\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObject.h">
+      <Filter>src\Gel</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelRendererComponent.h">
+      <Filter>src\Gel\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -124,6 +136,15 @@
     </ClCompile>
     <ClCompile Include="ShaderContainer.cpp">
       <Filter>src\Gel\ResourceClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>src\Gel\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneObject.cpp">
+      <Filter>src\Gel</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelRendererComponent.cpp">
+      <Filter>src\Gel\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

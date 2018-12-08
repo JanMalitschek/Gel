@@ -84,4 +84,7 @@ namespace Gel {
 	{
 		glUseProgram(this->Program);
 	}
+	GLuint Shader::GetProgram() {
+		return this->Program;
+	}
 }

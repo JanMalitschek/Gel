@@ -21,6 +21,7 @@ namespace Gel {
 		Shader(std::string name, const GLchar* vertexPath, const GLchar* fragmentPath);
 		// Uses the current shader
 		void Use();
+		GLuint GetProgram();
 	};
 
 }

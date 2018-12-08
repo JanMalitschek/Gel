@@ -16,6 +16,15 @@ namespace Gel {
 		this->shader = shader;
 	}
 
+	GLuint Material::GetProgram() {
+		if (this->shader != nullptr) {
+			return this->shader->Program;
+		}
+		else {
+			this->defaultShader.GetProgram();
+		}
+	}
+
 	void Material::UseShader() {
 		if (this->shader != nullptr) {
 			this->shader->Use();
@@ -23,5 +32,11 @@ namespace Gel {
 		else {
 			this->defaultShader.Use();
 		}
+	}
+
+	void Material::PassTexture(const char* uniformName, GLuint texture, GLenum activeTexture, int activeTextureID) {
+		glActiveTexture(activeTexture);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glUniform1i(glGetUniformLocation(GetProgram(), uniformName), activeTextureID);
 	}
 }

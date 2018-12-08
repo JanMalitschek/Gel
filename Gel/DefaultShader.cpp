@@ -29,7 +29,6 @@ namespace Gel {
 			"{\n"
 			"	color = vec4(1.0, 0.0, 1.0, 1.0);\n"
 			"}";
-
 		const GLchar* vShaderCode = vertexCode.c_str();
 		const GLchar * fShaderCode = fragmentCode.c_str();
 		// 2. Compile shaders
@@ -73,9 +72,14 @@ namespace Gel {
 		// Delete the shaders as they're linked into our program now and no longer necessery
 		glDeleteShader(vertex);
 		glDeleteShader(fragment);
+		std::cout << "Default Program ID: " << this->Program << std::endl;
 	}
 	void DefaultShader::Use()
 	{
 		glUseProgram(this->Program);
+	}
+
+	GLuint DefaultShader::GetProgram() {
+		return this->Program;
 	}
 }

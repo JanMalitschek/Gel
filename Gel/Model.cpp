@@ -44,18 +44,28 @@ namespace Gel {
 			std::cout << "The Model \"" << name << "\" does not have the same number of materials as it has submeshes! Thus is won't be drawn." << std::endl;
 		}
 	}
+	void Model::SetMaterial(int index, Material* material) {
+		if (index >= 0 && index < this->materials.size()) {
+			if (material != nullptr) {
+				this->materials[index] = material;
+			}
+			else {
+				this->materials[index] = new Material();
+			}
+		}
+	}
 	void Model::Draw(Transform transform)
 	{
 		if (isSetup) {
 			//Loop through all submeshes
 			for (GLuint i = 0; i < this->meshes.size(); i++) {
 				//use current shader for this submesh
-				Shader* activeShader = materials[i]->shader;
-				activeShader->Use();
+				GLuint activeProgram = materials[i]->GetProgram();
+				glUseProgram(activeProgram);
 				//Get Uniform locations for the matrices
-				GLint modelLoc = glGetUniformLocation(activeShader->Program, "model");
-				GLint viewLoc = glGetUniformLocation(activeShader->Program, "view");
-				GLint projLoc = glGetUniformLocation(activeShader->Program, "projection");
+				GLint modelLoc = glGetUniformLocation(activeProgram, "model");
+				GLint viewLoc = glGetUniformLocation(activeProgram, "view");
+				GLint projLoc = glGetUniformLocation(activeProgram, "projection");
 				//Set View Matrix
 				glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(Camera::GetUpdatedView()));
 				//Set Projection Matrix

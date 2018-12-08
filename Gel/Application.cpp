@@ -18,6 +18,7 @@ namespace Gel {
 		OnStart();
 		while (!glfwWindowShouldClose(EngineHandler::window)) {
 			glfwPollEvents();
+			RenderSettings::ClearBuffers();
 			System::Run();
 			OnUpdate();
 			glfwSwapBuffers(EngineHandler::window);

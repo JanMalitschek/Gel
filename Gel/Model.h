@@ -36,6 +36,7 @@ namespace Gel {
 		Model(string name, GLchar* path);
 		Model(string name, GLchar* path, vector<Material*> materials);
 		void SetMaterials(vector<Material*> materials);
+		void SetMaterial(int index, Material* material);
 
 		void Draw(Transform transform);
 

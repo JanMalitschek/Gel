@@ -1,0 +1,12 @@
+#Tex
+Resources/Default_Pattern.png
+Default_Pattern
+_Clamp
+_Nearest
+#Mod
+Resources/Sample_Floor.fbx
+Sample_Floor
+#Sha
+Unlit
+Resources/Unlit.vert
+Resources/Unlit.frag

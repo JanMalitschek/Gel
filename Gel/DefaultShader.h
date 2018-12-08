@@ -19,6 +19,7 @@ namespace Gel {
 		DefaultShader();
 		// Uses the current shader
 		void Use();
+		GLuint GetProgram();
 	};
 
 }

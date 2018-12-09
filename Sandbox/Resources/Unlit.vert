@@ -8,9 +8,22 @@ uniform mat4 view;
 uniform mat4 projection;
 
 out vec2 TexCoords;
+out vec3 Normal;
+
+vec4 VertexJitter(vec4 vertex, int resolution){
+	vec4 vert = vertex;
+	vert.x = round(vert.x * resolution) / resolution;
+	vert.y = round(vert.y * resolution) / resolution;
+	vert.z = round(vert.z * resolution) / resolution;
+	return vert;
+}
 
 void main()
 {
-    gl_Position = projection * view * model * vec4(position, 1.0f);
+	vec4 pos = view * model * vec4(position, 1.0f);
+	pos = VertexJitter(pos, 16);
+	pos = projection * pos;
+    gl_Position = pos;
 	TexCoords = texCoords;
+	Normal = normal;
 }

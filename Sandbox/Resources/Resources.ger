@@ -6,6 +6,8 @@ _Nearest
 #Mod
 Resources/Sample_Floor.fbx
 Sample_Floor
+Resources/Sample_Cube.fbx
+Sample_Cube
 #Sha
 Unlit
 Resources/Unlit.vert

@@ -8,9 +8,11 @@
 #include "Transform.h"
 #include "Camera.h"
 #include "SceneObject.h"
+#include "PhysicsEngine.h"
 
 //Components
 #include "ModelRendererComponent.h"
+#include "RigidBodyComponent.h"
 
 //Gel Resource Classes
 #include "Mesh.h"

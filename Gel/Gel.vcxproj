@@ -93,10 +93,11 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;GEL_BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Users\Aprikosis\source\repos\GelEngineLibraryDevelopment\External\inculde;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\Users\Aprikosis\source\repos\GelEngineLibraryDevelopment\External\lib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;SOIL.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;SOIL.lib;assimp.lib;BulletCollision_vs2010_debug.lib;BulletDynamics_vs2010_debug.lib;LinearMath_vs2010_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -161,8 +162,10 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelContainer.h" />
     <ClInclude Include="ModelRendererComponent.h" />
+    <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="RenderSettings.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="RigidBodyComponent.h" />
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderContainer.h" />
@@ -183,8 +186,10 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelContainer.cpp" />
     <ClCompile Include="ModelRendererComponent.cpp" />
+    <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="RenderSettings.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderContainer.cpp" />

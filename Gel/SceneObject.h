@@ -52,7 +52,16 @@ namespace Gel {
 		//Components
 		void AddComponent(Component* newComponent);
 		template<class ComponentType>
-		ComponentType* GetComponent();
+		ComponentType* GetComponent() {
+			for each(Component* c in components) {
+				ComponentType* tempComp = dynamic_cast<ComponentType*>(c);
+				if (tempComp != nullptr) {
+					return tempComp;
+				}
+			}
+			std::cout << "The SceneObject \"" << this->name << "\" does not have this Component attached to it!" << std::endl;
+			return new ComponentType;
+		}
 		Transform* GetTransform();
 
 		std::string name;

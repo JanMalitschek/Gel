@@ -84,6 +84,8 @@
     <ClInclude Include="ModelRendererComponent.h">
       <Filter>src\Gel\Components</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsEngine.h" />
+    <ClInclude Include="RigidBodyComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -146,5 +148,7 @@
     <ClCompile Include="ModelRendererComponent.cpp">
       <Filter>src\Gel\Components</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsEngine.cpp" />
+    <ClCompile Include="RigidBodyComponent.cpp" />
   </ItemGroup>
 </Project>

@@ -15,18 +15,6 @@ namespace Gel {
 		components.push_back(newComponent);
 	}
 
-	template<class ComponentType>
-	ComponentType* SceneObject::GetComponent() {
-		for each(Component* c in components) {
-			ComponentType* tempComp = dynamic_cast<ComponentType*>(c);
-			if (tempComp != nullptr) {
-				return tempComp;
-			}
-		}
-		std::cout << "The SceneObject \"" << this->name << "\" does not have this Component attached to it!" << std::endl;
-		return new ComponentType;
-	}
-
 	Transform* SceneObject::GetTransform() {
 		return &transform;
 	}

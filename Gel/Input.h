@@ -36,6 +36,7 @@ namespace Gel {
 		static bool GetMouseButton(int button);
 		static bool GetMouseButtonDown(int button);
 		static bool GetKey(int key);
+		static bool GetKeyDown(int key);
 		static GLfloat GetMouseWheelOffset();
 		static GLfloat GetMouseOffset(int axis);
 		static GLfloat GetMousePosition(int axis);
@@ -58,6 +59,7 @@ namespace Gel {
 		static bool mouseRightDown;
 
 		static bool keys[1024];
+		static bool keysDown[1024];
 		static float scrollOffset;
 		static float mouseOffsetX;
 		static float mouseOffsetY;

@@ -7,6 +7,7 @@ namespace Gel {
 	glm::ivec2 Input::screenDimensions = RenderSettings::GetScreenDimensions();
 	bool Input::firstMouse = true;
 	bool Input::keys[1024] = { false };
+	bool Input::keysDown[1024] = { false };
 
 	bool Input::mouseLeft = false;
 	bool Input::mouseMiddle = false;
@@ -78,8 +79,10 @@ namespace Gel {
 
 		if (action == GLFW_PRESS)
 			keys[key] = true;
-		else if (action == GLFW_RELEASE)
+		else if (action == GLFW_RELEASE) {
 			keys[key] = false;
+			keysDown[key] = false;
+		}
 	}
 
 #pragma endregion
@@ -171,6 +174,15 @@ namespace Gel {
 			return true;
 		else
 			return false;
+	}
+	bool Input::GetKeyDown(int key) {
+		if (keys[key] && !keysDown[key]) {
+			keysDown[key] = true;
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	GLfloat Input::GetMouseWheelOffset() {

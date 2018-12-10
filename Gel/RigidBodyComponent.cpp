@@ -27,17 +27,14 @@ namespace Gel {
 			this->parentTransform->position.x = t.getOrigin().getX();
 			this->parentTransform->position.y = t.getOrigin().getY();
 			this->parentTransform->position.z = t.getOrigin().getZ();
-			this->parentTransform->globalRotation.x = t.getRotation().getX();
-			this->parentTransform->globalRotation.y = t.getRotation().getY();
-			this->parentTransform->globalRotation.z = t.getRotation().getZ();
-			this->parentTransform->globalRotation.w = t.getRotation().getW();
+			this->parentTransform->SetRotation(glm::quat(t.getRotation().getW(), t.getRotation().getX(), t.getRotation().getY(), t.getRotation().getZ()));
 		}
 	}
 
 	void RigidBodyComponent::SetUpRigidBody() {
 		btTransform t;
 		t.setIdentity();
-		t.setRotation(btQuaternion(parentTransform->globalRotation.x, parentTransform->globalRotation.y, parentTransform->globalRotation.z, parentTransform->globalRotation.w));
+		t.setRotation(btQuaternion(parentTransform->rotation.x, parentTransform->rotation.y, parentTransform->rotation.z, parentTransform->rotation.w));
 		t.setOrigin(btVector3(parentTransform->position.x, parentTransform->position.y, parentTransform->position.z));
 		motionState = new btDefaultMotionState(t);
 		sphereShape = new btSphereShape(1.0f);
@@ -66,6 +63,31 @@ namespace Gel {
 	void RigidBodyComponent::SetRadius(btScalar radius) {
 		if (this->body->getCollisionShape()->getShapeType() == SPHERE_SHAPE_PROXYTYPE) {
 			this->body->getCollisionShape()->setLocalScaling(btVector3(radius, radius, radius));
+		}
+	}
+
+	void RigidBodyComponent::AddForce(glm::vec3 force, ForceType forceType) {
+		switch (forceType) {
+		case ForceType::Force:
+			this->body->applyCentralForce(btVector3(force.x, force.y, force.z));
+			break;
+		case ForceType::Impulse:
+			this->body->applyCentralImpulse(btVector3(force.x, force.y, force.z));
+			break;
+		default:
+			break;
+		}
+	}
+	void RigidBodyComponent::AddTorque(glm::vec3 torque, ForceType torqueType) {
+		switch (torqueType) {
+		case ForceType::Force:
+			this->body->applyTorque(btVector3(torque.x, torque.y, torque.z));
+			break;
+		case ForceType::Impulse:
+			this->body->applyTorqueImpulse(btVector3(torque.x, torque.y, torque.z));
+			break;
+		default:
+			break;
 		}
 	}
 

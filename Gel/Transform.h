@@ -17,8 +17,7 @@ namespace Gel {
 	public:
 
 		glm::vec3 position;
-		glm::quat localRotation;
-		glm::quat globalRotation;
+		glm::quat rotation;
 		glm::vec3 scale;
 		glm::vec3 forward;
 		glm::vec3 right;
@@ -34,9 +33,11 @@ namespace Gel {
 		void Transform::Translate(glm::vec3 translation);
 		void Transform::Translate(float x, float y, float z);
 
-		void Transform::SetRotation(glm::vec3 rotation, bool local = false);
-		void Transform::SetRotation(float x, float y, float z, bool local = false);
-		void Transform::Rotate(glm::vec3 axis, float angle, bool local = false);
+		void Transform::SetRotation(glm::vec3 rotation);
+		void Transform::SetRotation(float x, float y, float z);
+		void Transform::SetRotation(glm::quat rotation);
+		void Transform::Rotate(glm::vec3 axis, float angle);
+		glm::vec3 GetEulerAngles();
 
 		void Transform::SetScale(glm::vec3 scale);
 		void Transform::SetScale(float x, float y, float z);

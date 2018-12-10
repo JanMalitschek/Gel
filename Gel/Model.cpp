@@ -74,11 +74,8 @@ namespace Gel {
 				//Set Model Matrix
 				glm::mat4 modelMatrix = glm::mat4();
 				modelMatrix = glm::translate(modelMatrix, transform.position);
-				glm::quat completeRotation = transform.globalRotation * transform.localRotation;
-				glm::vec3 eulerAngles = glm::eulerAngles(completeRotation);
-				modelMatrix = glm::rotate(modelMatrix, eulerAngles.x, glm::vec3(1.0f, 0.0f, 0.0f));
-				modelMatrix = glm::rotate(modelMatrix, eulerAngles.y, glm::vec3(0.0f, 1.0f, 0.0f));
-				modelMatrix = glm::rotate(modelMatrix, eulerAngles.z, glm::vec3(0.0f, 0.0f, 1.0f));
+				glm::mat4 rotationMatrix = glm::toMat4(transform.rotation);
+				modelMatrix = modelMatrix * rotationMatrix;
 				modelMatrix = glm::scale(modelMatrix, transform.scale);
 				glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(modelMatrix));
 				//Pass Material Values

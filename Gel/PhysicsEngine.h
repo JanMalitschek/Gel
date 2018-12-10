@@ -12,6 +12,11 @@ namespace Gel {
 		Box
 	};
 
+	enum ForceType {
+		Force,
+		Impulse
+	};
+
 	static class GEL_API PhysicsEngine {
 	public:
 		static void Init();

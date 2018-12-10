@@ -14,6 +14,8 @@ namespace Gel {
 		void Update();
 		void SetSize(btVector3 size);
 		void SetRadius(btScalar radius);
+		void AddForce(glm::vec3 force, ForceType forceType);
+		void AddTorque(glm::vec3 torque, ForceType torqueType);
 	private:
 		void SetUpRigidBody();
 		BodyType type;

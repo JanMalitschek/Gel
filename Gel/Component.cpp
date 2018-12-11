@@ -1,9 +1,10 @@
 #include "Component.h"
+#include "SceneObject.h"
 
 namespace Gel {
 
 	Component::Component() {
-	
+		this->sceneObject = nullptr;
 	};
 	void Component::Update() {
 	

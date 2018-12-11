@@ -18,12 +18,16 @@
 #include "Transform.h"
 
 namespace Gel {
+
+	class SceneObject;
+
 	class GEL_API Component {
 	public:
 		Component();
 		virtual void Update();
 		void SetActive(bool active);
 		bool IsActive();
+		SceneObject* sceneObject;
 	protected:
 		Transform* parentTransform;
 		bool isActive;

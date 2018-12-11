@@ -84,8 +84,12 @@
     <ClInclude Include="ModelRendererComponent.h">
       <Filter>src\Gel\Components</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsEngine.h" />
-    <ClInclude Include="RigidBodyComponent.h" />
+    <ClInclude Include="PhysicsEngine.h">
+      <Filter>src\Gel</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBodyComponent.h">
+      <Filter>src\Gel\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -148,7 +152,11 @@
     <ClCompile Include="ModelRendererComponent.cpp">
       <Filter>src\Gel\Components</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsEngine.cpp" />
-    <ClCompile Include="RigidBodyComponent.cpp" />
+    <ClCompile Include="PhysicsEngine.cpp">
+      <Filter>src\Gel</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBodyComponent.cpp">
+      <Filter>src\Gel\Components</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

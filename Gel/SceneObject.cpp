@@ -13,6 +13,7 @@ namespace Gel {
 
 	void SceneObject::AddComponent(Component* newComponent) {
 		components.push_back(newComponent);
+		components[components.size() - 1]->sceneObject = this;
 	}
 
 	Transform* SceneObject::GetTransform() {

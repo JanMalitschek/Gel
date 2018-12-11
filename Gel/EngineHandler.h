@@ -19,6 +19,8 @@ namespace Gel {
 		static void SetWindowTitle(const char title[]);
 
 		static GLFWwindow* window;
+		static bool windowIsInFocus;
+		static void windowFocusCallback(GLFWwindow* window, int inFocus);
 	private:
 	};
 

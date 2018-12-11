@@ -8,7 +8,13 @@ namespace Gel {
 		this->isActive = true;
 		this->type = type;
 		this->mass = mass;
+		this->colliding = false;
+		this->collisionEnter = false;
 		SetUpRigidBody();
+		OnCollisionEnterCallback = nullptr;
+		OnCollisionStayCallback = nullptr;
+		OnCollisionExitCallback = nullptr;
+		currentOther = nullptr;
 	}
 
 	RigidBodyComponent::RigidBodyComponent()
@@ -17,7 +23,13 @@ namespace Gel {
 		this->isActive = true;
 		this->type = BodyType::Sphere;
 		this->mass = 1.0f;
+		this->colliding = false;
+		this->collisionEnter = false;
 		SetUpRigidBody();
+		OnCollisionEnterCallback = nullptr;
+		OnCollisionStayCallback = nullptr;
+		OnCollisionExitCallback = nullptr;
+		currentOther = nullptr;
 	}
 
 	void RigidBodyComponent::Update() {
@@ -28,6 +40,25 @@ namespace Gel {
 			this->parentTransform->position.y = t.getOrigin().getY();
 			this->parentTransform->position.z = t.getOrigin().getZ();
 			this->parentTransform->SetRotation(glm::quat(t.getRotation().getW(), t.getRotation().getX(), t.getRotation().getY(), t.getRotation().getZ()));
+
+			//Collision Callbacks
+			if (this->colliding) {
+				if (OnCollisionStayCallback != nullptr)
+					OnCollisionStayCallback(currentOther);
+				if (!this->collisionEnter) {
+					if (OnCollisionEnterCallback != nullptr)
+						OnCollisionEnterCallback(currentOther);
+				}
+				this->collisionEnter = true;
+			}
+			else {
+				if (this->collisionEnter) {
+					if(OnCollisionExitCallback != nullptr)
+						OnCollisionExitCallback(currentOther);
+					this->collisionEnter = false;
+				}
+			}
+			this->colliding = false;
 		}
 	}
 
@@ -43,26 +74,33 @@ namespace Gel {
 		switch (this->type) {
 		case BodyType::Sphere:
 			sphereShape->calculateLocalInertia(this->mass, inertia);
+			sphereShape->setMargin(0.04f);
 			this->body = new btRigidBody(this->mass, motionState, sphereShape, inertia);
 			break;
 		case BodyType::Box:
 			boxShape->calculateLocalInertia(this->mass, inertia);
+			boxShape->setMargin(0.04f);
 			this->body = new btRigidBody(this->mass, motionState, boxShape, inertia);
 			break;
 		default:
 			break;
 		}
+		this->body->setRestitution(0.0f);
+		this->body->setFlags(this->body->getFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+		this->body->setUserPointer(this);
 		PhysicsEngine::AddRigidBody(this->body);
 	}
 
 	void RigidBodyComponent::SetSize(btVector3 size) {
 		if (this->body->getCollisionShape()->getShapeType() == BOX_SHAPE_PROXYTYPE) {
 			this->body->getCollisionShape()->setLocalScaling(size);
+			this->body->getCollisionShape()->setMargin(0.04f);
 		}
 	}
 	void RigidBodyComponent::SetRadius(btScalar radius) {
 		if (this->body->getCollisionShape()->getShapeType() == SPHERE_SHAPE_PROXYTYPE) {
 			this->body->getCollisionShape()->setLocalScaling(btVector3(radius, radius, radius));
+			this->body->getCollisionShape()->setMargin(0.04f);
 		}
 	}
 
@@ -77,6 +115,7 @@ namespace Gel {
 		default:
 			break;
 		}
+		this->body->activate();
 	}
 	void RigidBodyComponent::AddTorque(glm::vec3 torque, ForceType torqueType) {
 		switch (torqueType) {
@@ -89,6 +128,12 @@ namespace Gel {
 		default:
 			break;
 		}
+		this->body->activate();
+	}
+
+	void RigidBodyComponent::Colliding(RigidBodyComponent* other) {
+		this->colliding = true;
+		this->currentOther = other;
 	}
 
 }

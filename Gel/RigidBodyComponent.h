@@ -9,6 +9,7 @@ namespace Gel {
 	class GEL_API RigidBodyComponent : public Component
 	{
 	public:
+		typedef void(*CollisionCallback)(RigidBodyComponent* other);
 		RigidBodyComponent(Transform* parentTransform, BodyType type, float mass);
 		RigidBodyComponent();
 		void Update();
@@ -16,6 +17,10 @@ namespace Gel {
 		void SetRadius(btScalar radius);
 		void AddForce(glm::vec3 force, ForceType forceType);
 		void AddTorque(glm::vec3 torque, ForceType torqueType);
+		void Colliding(RigidBodyComponent* other);
+		CollisionCallback OnCollisionEnterCallback;
+		CollisionCallback OnCollisionStayCallback;
+		CollisionCallback OnCollisionExitCallback;
 	private:
 		void SetUpRigidBody();
 		BodyType type;
@@ -24,6 +29,9 @@ namespace Gel {
 		btSphereShape* sphereShape;
 		btBoxShape* boxShape;
 		float mass;
+		bool colliding;
+		bool collisionEnter;
+		RigidBodyComponent* currentOther;
 	};
 
 }

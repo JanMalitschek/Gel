@@ -31,6 +31,8 @@ namespace Gel {
 		DefaultShader defaultShader;
 	protected:
 		void PassTexture(const char* uniformName, GLuint texture, GLenum activeTexture, int activeTextureID);
+		void PassColor(const char* uniformName, glm::vec3 color);
+		void PassColorWithAlpha(const char* uniformName, glm::vec4 color);
 	};
 
 }

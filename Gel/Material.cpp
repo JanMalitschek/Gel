@@ -39,4 +39,10 @@ namespace Gel {
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glUniform1i(glGetUniformLocation(GetProgram(), uniformName), activeTextureID);
 	}
+	void Material::PassColor(const char* uniformName, glm::vec3 color) {
+		glUniform3f(glGetUniformLocation(GetProgram(), uniformName), color.r, color.g, color.b);
+	}
+	void Material::PassColorWithAlpha(const char* uniformName, glm::vec4 color) {
+		glUniform4f(glGetUniformLocation(GetProgram(), uniformName), color.r, color.g, color.b, color.a);
+	}
 }

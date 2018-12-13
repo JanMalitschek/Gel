@@ -13,6 +13,7 @@
 //Components
 #include "ModelRendererComponent.h"
 #include "RigidBodyComponent.h"
+#include "CameraComponent.h"
 
 //Gel Resource Classes
 #include "Mesh.h"

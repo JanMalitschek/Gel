@@ -73,6 +73,16 @@ namespace Gel {
 				glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(Camera::GetProjection()));
 				//Set Model Matrix
 				glm::mat4 modelMatrix = glm::mat4();
+
+				//Parent Transformation
+				if (transform.parent != nullptr) {
+					modelMatrix = glm::translate(modelMatrix, transform.parent->position);
+					glm::mat4 parentRotationMatrix = glm::toMat4(transform.parent->rotation);
+					modelMatrix = modelMatrix * parentRotationMatrix;
+					modelMatrix = glm::scale(modelMatrix, transform.parent->scale);
+				}
+
+				//Actual model Transformation
 				modelMatrix = glm::translate(modelMatrix, transform.position);
 				glm::mat4 rotationMatrix = glm::toMat4(transform.rotation);
 				modelMatrix = modelMatrix * rotationMatrix;

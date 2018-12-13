@@ -28,6 +28,8 @@ namespace Gel {
 		void SetActive(bool active);
 		bool IsActive();
 		SceneObject* sceneObject;
+		void SetParentTransform(Transform* parentTransform);
+		Transform* GetParentTransform();
 	protected:
 		Transform* parentTransform;
 		bool isActive;

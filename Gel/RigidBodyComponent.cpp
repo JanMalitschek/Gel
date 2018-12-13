@@ -15,6 +15,8 @@ namespace Gel {
 		OnCollisionStayCallback = nullptr;
 		OnCollisionExitCallback = nullptr;
 		currentOther = nullptr;
+		this->isStatic = false;
+		this->isTrigger = false;
 	}
 
 	RigidBodyComponent::RigidBodyComponent()
@@ -30,6 +32,8 @@ namespace Gel {
 		OnCollisionStayCallback = nullptr;
 		OnCollisionExitCallback = nullptr;
 		currentOther = nullptr;
+		this->isStatic = false;
+		this->isTrigger = false;
 	}
 
 	void RigidBodyComponent::Update() {
@@ -70,6 +74,8 @@ namespace Gel {
 		motionState = new btDefaultMotionState(t);
 		sphereShape = new btSphereShape(1.0f);
 		boxShape = new btBoxShape(btVector3(0.5f, 0.5f, 0.5f));
+		cyliderShape = new btCylinderShape(btVector3(0.5f, 0.5f, 0.5f));
+		capsuleShape = new btCapsuleShape(1.0f, 4.0f);
 		btVector3 inertia = btVector3(0.0f, 0.0f, 0.0f);
 		switch (this->type) {
 		case BodyType::Sphere:
@@ -82,12 +88,24 @@ namespace Gel {
 			boxShape->setMargin(0.04f);
 			this->body = new btRigidBody(this->mass, motionState, boxShape, inertia);
 			break;
+		case BodyType::Cylinder:
+			cyliderShape->calculateLocalInertia(this->mass, inertia);
+			cyliderShape->setMargin(0.04f);
+			this->body = new btRigidBody(this->mass, motionState, cyliderShape, inertia);
+			break;
+		case BodyType::Capsule:
+			capsuleShape->calculateLocalInertia(this->mass, inertia);
+			capsuleShape->setMargin(0.04f);
+			this->body = new btRigidBody(this->mass, motionState, capsuleShape, inertia);
+			break;
 		default:
 			break;
 		}
 		this->body->setRestitution(0.0f);
 		this->body->setFlags(this->body->getFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 		this->body->setUserPointer(this);
+		if (this->mass <= 0.0f)
+			this->isStatic = true;
 		PhysicsEngine::AddRigidBody(this->body);
 	}
 
@@ -100,6 +118,16 @@ namespace Gel {
 	void RigidBodyComponent::SetRadius(btScalar radius) {
 		if (this->body->getCollisionShape()->getShapeType() == SPHERE_SHAPE_PROXYTYPE) {
 			this->body->getCollisionShape()->setLocalScaling(btVector3(radius, radius, radius));
+			this->body->getCollisionShape()->setMargin(0.04f);
+		}
+	}
+	void RigidBodyComponent::SetRadiusAndHeight(btScalar radius, btScalar height) {
+		if (this->body->getCollisionShape()->getShapeType() == CYLINDER_SHAPE_PROXYTYPE) {
+			this->body->setCollisionShape(new btCylinderShape(btVector3(radius, height / 2, radius)));
+			this->body->getCollisionShape()->setMargin(0.04f);
+		}
+		else if (this->body->getCollisionShape()->getShapeType() == CAPSULE_SHAPE_PROXYTYPE) {
+			this->body->setCollisionShape(new btCapsuleShape(radius, height));
 			this->body->getCollisionShape()->setMargin(0.04f);
 		}
 	}
@@ -134,6 +162,44 @@ namespace Gel {
 	void RigidBodyComponent::Colliding(RigidBodyComponent* other) {
 		this->colliding = true;
 		this->currentOther = other;
+	}
+
+	void RigidBodyComponent::SetIsStatic(bool isStatic) {
+		this->isStatic = isStatic;
+		int staticFlag = 0;
+		if (this->isStatic) {
+			btVector3 inertia;
+			this->body->getCollisionShape()->calculateLocalInertia(0.0f, inertia);
+			this->body->setMassProps(0.0f, inertia);
+			staticFlag = btCollisionObject::CF_STATIC_OBJECT;
+		}
+		else {
+			btVector3 inertia;
+			this->body->getCollisionShape()->calculateLocalInertia(this->mass, inertia);
+			this->body->setMassProps(this->mass, inertia);
+		}
+
+		int triggerFlag = 0;
+		if (this->isTrigger)
+			triggerFlag = btCollisionObject::CF_NO_CONTACT_RESPONSE;
+
+		this->body->setCollisionFlags(staticFlag | triggerFlag);
+	}
+
+	void RigidBodyComponent::SetIsTrigger(bool isTrigger) {
+		this->isTrigger = isTrigger;
+		int triggerFlag = 0;
+		int staticFlag = 0;
+		if (this->isTrigger)
+			triggerFlag = btCollisionObject::CF_NO_CONTACT_RESPONSE;
+		if (this->isStatic)
+			staticFlag = btCollisionObject::CF_STATIC_OBJECT;
+		this->body->setCollisionFlags(staticFlag | triggerFlag);
+	}
+
+	void RigidBodyComponent::Translate(glm::vec3 translation) {
+		this->body->translate(btVector3(translation.x, translation.y, translation.z));
+		this->body->activate();
 	}
 
 }

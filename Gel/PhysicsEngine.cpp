@@ -40,6 +40,7 @@ namespace Gel{
 			rayHit.hit = true;
 			rayHit.hitPoint = glm::vec3(rayCallback.m_hitPointWorld.getX(), rayCallback.m_hitPointWorld.getY(), rayCallback.m_hitPointWorld.getZ());
 			rayHit.hitNormal = glm::vec3(rayCallback.m_hitNormalWorld.getX(), rayCallback.m_hitNormalWorld.getY(), rayCallback.m_hitNormalWorld.getZ());
+			rayHit.body = static_cast<RigidBodyComponent*>(rayCallback.m_collisionObject->getUserPointer());
 		}
 		else {
 			rayHit.hit = false;

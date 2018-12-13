@@ -49,6 +49,10 @@ namespace Gel {
 		void Scale(glm::vec3 scale);
 		void Scale(float x, float y, float z);
 
+		SceneObject* Instantiate(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+		int GetNumComponents();
+		Component* GetUncastedComponent(int index);
+
 		//Components
 		void AddComponent(Component* newComponent);
 		template<class ComponentType>
@@ -63,6 +67,7 @@ namespace Gel {
 			return new ComponentType;
 		}
 		Transform* GetTransform();
+		void ResetTransform();
 
 		std::string name;
 

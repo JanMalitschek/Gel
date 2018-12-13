@@ -1,8 +1,12 @@
 #include "EngineHandler.h"
+#include "SceneObject.h"
 
 namespace Gel {
 
 	bool EngineHandler::windowIsInFocus = true;
+	std::vector<SceneObject*> EngineHandler::sceneObjects = std::vector<SceneObject*>();
+	std::vector<SceneObject*> EngineHandler::instancedSceneObjects = std::vector<SceneObject*>();
+	GLFWwindow* EngineHandler::window = nullptr;
 
 	void EngineHandler::windowFocusCallback(GLFWwindow* window, int inFocus) {
 		if (inFocus == GLFW_TRUE) {
@@ -32,5 +36,13 @@ namespace Gel {
 		glfwSetWindowTitle(window, title);
 	}
 
-	GLFWwindow* EngineHandler::window = nullptr;
+	void EngineHandler::UpdateSceneObjects() {
+		for (int i = 0; i < sceneObjects.size(); i++) {
+			sceneObjects[i]->Update();
+		}
+		for (int i = 0; i < instancedSceneObjects.size(); i++) {
+			instancedSceneObjects[i]->Update();
+		}
+	}
+
 }

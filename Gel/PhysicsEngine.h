@@ -13,7 +13,9 @@ namespace Gel {
 
 	enum BodyType {
 		Sphere,
-		Box
+		Box,
+		Cylinder,
+		Capsule
 	};
 
 	enum ForceType {
@@ -21,9 +23,11 @@ namespace Gel {
 		Impulse
 	};
 
+	class RigidBodyComponent;
+
 	struct GEL_API RaycastHitResult {
 		bool hit;
-		btRigidBody* body;
+		RigidBodyComponent* body;
 		glm::vec3 hitPoint;
 		glm::vec3 hitNormal;
 	};

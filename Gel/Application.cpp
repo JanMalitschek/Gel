@@ -24,6 +24,7 @@ namespace Gel {
 			System::Run();
 			PhysicsEngine::Update(System::GetDeltaTime());
 			OnUpdate();
+			EngineHandler::UpdateSceneObjects();
 			glfwSwapBuffers(EngineHandler::window);
 		}
 		OnTerminate();

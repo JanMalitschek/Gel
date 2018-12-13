@@ -21,7 +21,7 @@ vec4 VertexJitter(vec4 vertex, int resolution){
 void main()
 {
 	vec4 pos = view * model * vec4(position, 1.0f);
-	pos = VertexJitter(pos, 16);
+	pos = VertexJitter(pos, 64);
 	pos = projection * pos;
     gl_Position = pos;
 	TexCoords = texCoords;

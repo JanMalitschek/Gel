@@ -90,6 +90,9 @@
     <ClInclude Include="RigidBodyComponent.h">
       <Filter>src\Gel\Components</Filter>
     </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>src\Gel\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -156,6 +159,9 @@
       <Filter>src\Gel</Filter>
     </ClCompile>
     <ClCompile Include="RigidBodyComponent.cpp">
+      <Filter>src\Gel\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraComponent.cpp">
       <Filter>src\Gel\Components</Filter>
     </ClCompile>
   </ItemGroup>

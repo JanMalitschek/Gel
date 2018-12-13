@@ -15,5 +15,11 @@ namespace Gel {
 	bool Component::IsActive() {
 		return isActive;
 	};
+	void Component::SetParentTransform(Transform* parentTransform) {
+		this->parentTransform = parentTransform;
+	}
+	Transform* Component::GetParentTransform() {
+		return this->parentTransform;
+	}
 
 }

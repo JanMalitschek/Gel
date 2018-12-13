@@ -9,6 +9,7 @@ namespace Gel {
 		this->forward = glm::vec3(0.0f, 0.0f, 1.0f);
 		this->right = glm::vec3(1.0f, 0.0f, 0.0f);
 		this->up = glm::vec3(0.0f, 1.0f, 0.0f);
+		this->parent = nullptr;
 	}
 	Transform::Transform(glm::vec3 position) {
 		this->position = position;
@@ -17,6 +18,7 @@ namespace Gel {
 		this->forward = glm::vec3(0.0f, 0.0f, 1.0f);
 		this->right = glm::vec3(1.0f, 0.0f, 0.0f);
 		this->up = glm::vec3(0.0f, 1.0f, 0.0f);
+		this->parent = nullptr;
 	}
 	Transform::Transform(glm::vec3 position, glm::vec3 rotation) {
 		this->position = position;
@@ -25,9 +27,10 @@ namespace Gel {
 		this->rotation = glm::rotate(this->rotation, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
 		this->rotation = glm::rotate(this->rotation, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 		this->scale = glm::vec3(1.0f, 1.0f, 1.0f);
-		this->forward = glm::vec3(0.0f, 0.0f, 1.0f);
-		this->right = glm::vec3(1.0f, 0.0f, 0.0f);
-		this->up = glm::vec3(0.0f, 1.0f, 0.0f);
+		this->forward = this->rotation * glm::vec3(0.0f, 0.0f, 1.0f);
+		this->right = this->rotation * glm::vec3(1.0f, 0.0f, 0.0f);
+		this->up = this->rotation * glm::vec3(0.0f, 1.0f, 0.0f);
+		this->parent = nullptr;
 	}
 	Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) {
 		this->position = position;
@@ -36,9 +39,10 @@ namespace Gel {
 		this->rotation = glm::rotate(this->rotation, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
 		this->rotation = glm::rotate(this->rotation, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 		this->scale = scale;
-		this->forward = glm::vec3(0.0f, 0.0f, 1.0f);
-		this->right = glm::vec3(1.0f, 0.0f, 0.0f);
-		this->up = glm::vec3(0.0f, 1.0f, 0.0f);
+		this->forward = this->rotation * glm::vec3(0.0f, 0.0f, 1.0f);
+		this->right = this->rotation * glm::vec3(1.0f, 0.0f, 0.0f);
+		this->up = this->rotation * glm::vec3(0.0f, 1.0f, 0.0f);
+		this->parent = nullptr;
 	}
 	void Transform::SetPosition(glm::vec3 position) {
 		this->position = position;
@@ -77,10 +81,11 @@ namespace Gel {
 		this->right = this->rotation * glm::vec3(1.0f, 0.0f, 0.0f);
 	}
 	void Transform::Rotate(glm::vec3 axis, float angle) {
-		this->rotation = glm::rotate(this->rotation, angle, axis);
-		this->forward = this->rotation * glm::vec3(0.0f, 0.0f, 1.0f);
-		this->up = this->rotation * glm::vec3(0.0f, 1.0f, 0.0f);
-		this->right = this->rotation * glm::vec3(1.0f, 0.0f, 0.0f);
+		glm::quat rot = glm::angleAxis(angle, axis);
+		this->rotation = rot * this->rotation;
+		this->forward = rot * this->forward;
+		this->up = rot * this->up;
+		this->right = rot * this->right;
 	}
 	glm::vec3 Transform::GetEulerAngles() {
 		glm::vec3 eulerAngles = glm::eulerAngles(this->rotation);

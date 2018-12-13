@@ -16,6 +16,8 @@ namespace Gel {
 	struct GEL_API Transform {
 	public:
 
+		Transform* parent;
+
 		glm::vec3 position;
 		glm::quat rotation;
 		glm::vec3 scale;

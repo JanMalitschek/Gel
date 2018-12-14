@@ -81,12 +81,15 @@ public:
 		if (Gel::Input::GetKey(GLFW_KEY_A)) {
 			cameraObject->GetTransform()->Translate(cameraObject->GetTransform()->right * Gel::System::GetDeltaTime() * 10.0f);
 		}
+		if (Gel::Input::GetMouseButtonDown(0)) {
+			Gel::RaycastHitResult hitResult = Gel::PhysicsEngine::RayCast(cameraObject->GetTransform()->position, cameraObject->GetTransform()->forward, 50.0f);
+			if (hitResult.hit) {
+				hitResult.body->AddForce(cameraObject->GetTransform()->forward * 10.0f + glm::vec3(0.0f, 10.0f, 0.0f), Gel::ForceType::Impulse);
+			}
+		}
 		cameraObject->GetTransform()->Rotate(glm::vec3(0.0f, 1.0f, 0.0f), -Gel::Input::GetMouseOffset(0) * 0.3f * Gel::System::GetDeltaTime());
 		glm::vec3 right = cameraObject->GetTransform()->right;
 		cameraObject->GetTransform()->Rotate(right, -Gel::Input::GetMouseOffset(1) * 0.3f * Gel::System::GetDeltaTime());
-		if (Gel::Input::GetKeyDown(GLFW_KEY_SPACE)) {
-			cubeObject->GetComponent<Gel::RigidBodyComponent>()->AddForce(cubeObject->GetTransform()->up * 10.0f, Gel::ForceType::Impulse);
-		}
 		Gel::PhysicsEngine::CheckForCollision();
 	}
 	void OnTerminate() override {

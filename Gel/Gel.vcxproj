@@ -92,11 +92,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;GEL_BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Aprikosis\source\repos\GelEngineLibraryDevelopment\External\inculde;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\Aprikosis\source\repos\GelEngineLibraryDevelopment\External\lib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)External\lib\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;SOIL.lib;assimp.lib;BulletCollision_vs2010_debug.lib;BulletDynamics_vs2010_debug.lib;LinearMath_vs2010_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -121,12 +121,12 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;GEL_BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Aprikosis\source\repos\GelEngineLibraryDevelopment\External\inculde;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\Aprikosis\source\repos\GelEngineLibraryDevelopment\External\lib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)External\lib\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;SOIL.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -156,6 +156,7 @@
     <ClInclude Include="DefaultShader.h" />
     <ClInclude Include="EngineHandler.h" />
     <ClInclude Include="EntryPoint.h" />
+    <ClInclude Include="Framebuffer.h" />
     <ClInclude Include="Gel.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Material.h" />
@@ -164,6 +165,8 @@
     <ClInclude Include="ModelContainer.h" />
     <ClInclude Include="ModelRendererComponent.h" />
     <ClInclude Include="PhysicsEngine.h" />
+    <ClInclude Include="PostProcessingStack.h" />
+    <ClInclude Include="Renderbuffer.h" />
     <ClInclude Include="RenderSettings.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="RigidBodyComponent.h" />
@@ -182,6 +185,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DefaultShader.cpp" />
     <ClCompile Include="EngineHandler.cpp" />
+    <ClCompile Include="Framebuffer.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -189,6 +193,8 @@
     <ClCompile Include="ModelContainer.cpp" />
     <ClCompile Include="ModelRendererComponent.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
+    <ClCompile Include="PostProcessingStack.cpp" />
+    <ClCompile Include="Renderbuffer.cpp" />
     <ClCompile Include="RenderSettings.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />

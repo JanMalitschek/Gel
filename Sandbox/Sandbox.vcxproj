@@ -90,10 +90,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Aprikosis\source\repos\GelEngineLibraryDevelopment\External\inculde;$(SolutionDir)Gel</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)External\include;$(SolutionDir)Gel</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\Aprikosis\source\repos\GelEngineLibraryDevelopment\bin\Debug-Win32\Gel;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin\Debug-Win32\Gel</AdditionalLibraryDirectories>
       <AdditionalDependencies>Gel.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -116,13 +116,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Aprikosis\source\repos\GelEngineLibraryDevelopment\External\inculde;$(SolutionDir)Gel</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)External\include;$(SolutionDir)Gel</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>Gel.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Aprikosis\source\repos\GelEngineLibraryDevelopment\bin\Release-Win32\Gel;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin\Debug-Win32\Gel</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

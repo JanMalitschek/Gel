@@ -93,6 +93,9 @@
     <ClInclude Include="CameraComponent.h">
       <Filter>src\Gel\Components</Filter>
     </ClInclude>
+    <ClInclude Include="PostProcessingStack.h" />
+    <ClInclude Include="Framebuffer.h" />
+    <ClInclude Include="Renderbuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -164,5 +167,8 @@
     <ClCompile Include="CameraComponent.cpp">
       <Filter>src\Gel\Components</Filter>
     </ClCompile>
+    <ClCompile Include="PostProcessingStack.cpp" />
+    <ClCompile Include="Framebuffer.cpp" />
+    <ClCompile Include="Renderbuffer.cpp" />
   </ItemGroup>
 </Project>

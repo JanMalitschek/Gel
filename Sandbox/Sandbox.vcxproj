@@ -145,6 +145,8 @@
     <ClCompile Include="SandboxMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="InvertColorEffect.h" />
+    <ClInclude Include="PixelationEffect.h" />
     <ClInclude Include="UnlitMaterial.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

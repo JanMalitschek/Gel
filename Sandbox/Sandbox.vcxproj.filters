@@ -14,5 +14,11 @@
     <ClInclude Include="UnlitMaterial.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="InvertColorEffect.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelationEffect.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

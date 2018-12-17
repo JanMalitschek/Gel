@@ -12,10 +12,13 @@ namespace Gel {
 	{
 	public:
 		Framebuffer();
+		Framebuffer(int width, int height);
 		~Framebuffer();
 		GLuint FBO;
 		Texture textureAttachment;
 		Renderbuffer RBO;
+		void Bind();
+		void Unbind();
 	};
 
 }

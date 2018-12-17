@@ -29,6 +29,9 @@ namespace Gel {
 
 	bool RenderSettings::runInEditor = false;
 
+	bool RenderSettings::glewInitialized = false;
+	PostProcessingStack RenderSettings::postProcessingStack = PostProcessingStack();
+
 	//Internal
 	void RenderSettings::CalculateAspectRatio() {
 		aspectRatio = (GLfloat)glViewportWidth / (GLfloat)glViewportHeight;
@@ -337,9 +340,11 @@ namespace Gel {
 		glfwMakeContextCurrent(window);
 
 		glewExperimental = GL_TRUE;
+		
 		if (glewInit() != GLEW_OK) {
 			std::cout << "Couldnt initialize GLEW!" << std::endl;
 		}
+		glewInitialized = true;
 
 		//Set the OpenGL viewport
 		if (!runningInFullscreen) {

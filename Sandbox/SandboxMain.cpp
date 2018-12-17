@@ -1,5 +1,7 @@
 #include <Gel.h>
 #include "UnlitMaterial.h"
+#include "InvertColorEffect.h"
+#include "PixelationEffect.h"
 
 void OnCollisionStay(Gel::RigidBodyComponent* other) {
 	std::cout << other->sceneObject->name << std::endl;
@@ -29,6 +31,8 @@ public:
 		Gel::RenderSettings::SetDepthTestMode(Gel::DepthTestMode::DepthTest_Enabled);
 		Gel::Input::SetCursorMode(Gel::EngineHandler::window, Gel::CursorMode::CursorMode_Disabled);
 		Gel::Camera::SetPosition(glm::vec3(0.0f, 3.0f, 15.0f));
+		Gel::RenderSettings::postProcessingStack.AddEffect(new InvertColorEffect());
+		Gel::RenderSettings::postProcessingStack.AddEffect(new PixexlationEffect());
 
 		floorMaterial = new UnlitMaterial();
 		floorMaterial->texture = Gel::TextureContainer::GetTextureData("Default_Pattern");

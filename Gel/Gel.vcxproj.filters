@@ -93,9 +93,18 @@
     <ClInclude Include="CameraComponent.h">
       <Filter>src\Gel\Components</Filter>
     </ClInclude>
-    <ClInclude Include="PostProcessingStack.h" />
-    <ClInclude Include="Framebuffer.h" />
-    <ClInclude Include="Renderbuffer.h" />
+    <ClInclude Include="Renderbuffer.h">
+      <Filter>src\Gel</Filter>
+    </ClInclude>
+    <ClInclude Include="Framebuffer.h">
+      <Filter>src\Gel</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessingStack.h">
+      <Filter>src\Gel</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessingEffect.h">
+      <Filter>src\Gel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -167,8 +176,17 @@
     <ClCompile Include="CameraComponent.cpp">
       <Filter>src\Gel\Components</Filter>
     </ClCompile>
-    <ClCompile Include="PostProcessingStack.cpp" />
-    <ClCompile Include="Framebuffer.cpp" />
-    <ClCompile Include="Renderbuffer.cpp" />
+    <ClCompile Include="Framebuffer.cpp">
+      <Filter>src\Gel</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessingStack.cpp">
+      <Filter>src\Gel</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderbuffer.cpp">
+      <Filter>src\Gel</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessingEffect.cpp">
+      <Filter>src\Gel</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

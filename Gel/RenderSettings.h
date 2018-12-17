@@ -10,6 +10,8 @@
 #include <glm\gtc\type_ptr.hpp>
 #include <glm\gtx\rotate_vector.hpp>
 
+#include "PostProcessingStack.h"
+
 namespace Gel {
 
 	enum RenderMode {
@@ -73,6 +75,8 @@ namespace Gel {
 		static float GetFarPlane();
 		static int GetGLViewportWidth();
 		static int GetGLViewportHeight();
+		static bool glewInitialized;
+		static PostProcessingStack postProcessingStack;
 
 		static void SetScreenHeight(int height);
 		static void SetScreenWidth(int width);

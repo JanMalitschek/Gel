@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "SceneObject.h"
 #include "PhysicsEngine.h"
+#include "PostProcessingEffect.h"
 
 //Components
 #include "ModelRendererComponent.h"

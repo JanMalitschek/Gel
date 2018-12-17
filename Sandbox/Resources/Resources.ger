@@ -19,3 +19,9 @@ Shotgun
 Unlit
 Resources/Unlit.vert
 Resources/Unlit.frag
+InvertColor
+Resources/InvertColor.vert
+Resources/InvertColor.frag
+Pixelate
+Resources/InvertColor.vert
+Resources/Pixelate.frag

@@ -20,6 +20,7 @@ namespace Gel {
 
 	void EngineHandler::InitEngine() {
 		window = RenderSettings::SetupWindow();
+		RenderSettings::postProcessingStack = Gel::PostProcessingStack();
 		Input::SetupCallBacks(window);
 		glfwSetWindowFocusCallback(window, windowFocusCallback);
 	}

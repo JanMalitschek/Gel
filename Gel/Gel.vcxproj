@@ -165,6 +165,7 @@
     <ClInclude Include="ModelContainer.h" />
     <ClInclude Include="ModelRendererComponent.h" />
     <ClInclude Include="PhysicsEngine.h" />
+    <ClInclude Include="PostProcessingEffect.h" />
     <ClInclude Include="PostProcessingStack.h" />
     <ClInclude Include="Renderbuffer.h" />
     <ClInclude Include="RenderSettings.h" />
@@ -193,6 +194,7 @@
     <ClCompile Include="ModelContainer.cpp" />
     <ClCompile Include="ModelRendererComponent.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
+    <ClCompile Include="PostProcessingEffect.cpp" />
     <ClCompile Include="PostProcessingStack.cpp" />
     <ClCompile Include="Renderbuffer.cpp" />
     <ClCompile Include="RenderSettings.cpp" />

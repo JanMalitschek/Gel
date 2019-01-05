@@ -19,6 +19,7 @@ namespace Gel {
 		Renderbuffer RBO;
 		void Bind();
 		void Unbind();
+		GLint currentFramebuffer;
 	};
 
 }

@@ -71,6 +71,8 @@ namespace Gel {
 
 		std::string name;
 
+		RenderLayers renderLayer;
+
 	private:
 		Transform transform;
 		vector<Component*> components;

@@ -19,10 +19,8 @@ namespace Gel {
 			glEnableVertexAttribArray(1);
 			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)(2 * sizeof(GLfloat)));
 			glBindVertexArray(0);
-
 		}
 	}
-
 
 	PostProcessingStack::~PostProcessingStack()
 	{
@@ -49,16 +47,16 @@ namespace Gel {
 			if (i + 1 < this->effects.size()) {
 				this->effects[i + 1]->BeginCapture();
 				this->effects[i]->Use();
-				this->effects[i]->PassScreenTexture(i);
+				this->effects[i]->PassScreenTexture(0);
 				glBindVertexArray(this->VAO);
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 				glBindVertexArray(0);
 				this->effects[i + 1]->EndCapture();
 			}
 			else {
-				glBindFramebuffer(GL_FRAMEBUFFER, currentFramebuffer);
+				glBindFramebuffer(GL_FRAMEBUFFER, 0);
 				this->effects[i]->Use();
-				this->effects[i]->PassScreenTexture(i);
+				this->effects[i]->PassScreenTexture(0);
 				glBindVertexArray(this->VAO);
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 				glBindVertexArray(0);

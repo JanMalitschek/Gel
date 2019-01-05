@@ -21,6 +21,7 @@ namespace Gel {
 	CullingMode RenderSettings::cullingMode = CullingMode::CullingMode_Back;
 	DepthTestMode RenderSettings::depthTestMode = DepthTestMode::DepthTest_Enabled;
 	BlendMode RenderSettings::blendMode = BlendMode::BlendMode_Default;
+	unsigned int RenderSettings::renderLayerFlags = RenderLayers::Default;
 
 	DirectionalLight RenderSettings::directionalLight = DirectionalLight(glm::vec3(-1.0f, -1.0f, -1.0f), 1.0f, glm::vec3(1.0f, 1.0f, 1.0f));
 	AmbientLight RenderSettings::ambientLight = AmbientLight(0.3f, glm::vec3(1.0f, 1.0f, 1.0f));
@@ -82,6 +83,10 @@ namespace Gel {
 
 	DepthTestMode RenderSettings::GetDepthTestMode() {
 		return depthTestMode;
+	}
+
+	unsigned int RenderSettings::GetRenderLayerFlags() {
+		return renderLayerFlags;
 	}
 
 	AmbientLight RenderSettings::GetAmbientLight() {
@@ -201,6 +206,10 @@ namespace Gel {
 		default:
 			break;
 		}
+	}
+
+	void RenderSettings::SetRenderLayerFlags(unsigned int renderLayerFlags) {
+		RenderSettings::renderLayerFlags = renderLayerFlags;
 	}
 
 	void RenderSettings::SetClearColor(glm::vec4 clearColor) {

@@ -2,9 +2,9 @@
 #include "PostProcessingEffect.h"
 #include "ResourceManager.h"
 
-class PixexlationEffect : public Gel::PostProcessingEffect {
+class PixelationEffect : public Gel::PostProcessingEffect {
 public:
-	PixexlationEffect() {
+	PixelationEffect() {
 		this->shader = Gel::ShaderContainer::GetShader("Pixelate");
 	}
 	void Use() override {

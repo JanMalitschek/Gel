@@ -31,8 +31,9 @@ public:
 		Gel::RenderSettings::SetDepthTestMode(Gel::DepthTestMode::DepthTest_Enabled);
 		Gel::Input::SetCursorMode(Gel::EngineHandler::window, Gel::CursorMode::CursorMode_Disabled);
 		Gel::Camera::SetPosition(glm::vec3(0.0f, 3.0f, 15.0f));
+		Gel::RenderSettings::SetRenderLayerFlags(Gel::RenderLayers::Default);
 		Gel::RenderSettings::postProcessingStack.AddEffect(new InvertColorEffect());
-		Gel::RenderSettings::postProcessingStack.AddEffect(new PixexlationEffect());
+		Gel::RenderSettings::postProcessingStack.AddEffect(new PixelationEffect());
 
 		floorMaterial = new UnlitMaterial();
 		floorMaterial->texture = Gel::TextureContainer::GetTextureData("Default_Pattern");
@@ -91,9 +92,9 @@ public:
 				hitResult.body->AddForce(cameraObject->GetTransform()->forward * 10.0f + glm::vec3(0.0f, 10.0f, 0.0f), Gel::ForceType::Impulse);
 			}
 		}
-		cameraObject->GetTransform()->Rotate(glm::vec3(0.0f, 1.0f, 0.0f), -Gel::Input::GetMouseOffset(0) * 0.3f * Gel::System::GetDeltaTime());
+		cameraObject->GetTransform()->Rotate(glm::vec3(0.0f, 1.0f, 0.0f), -Gel::Input::GetMouseOffset(0) * Gel::System::GetDeltaTime());
 		glm::vec3 right = cameraObject->GetTransform()->right;
-		cameraObject->GetTransform()->Rotate(right, -Gel::Input::GetMouseOffset(1) * 0.3f * Gel::System::GetDeltaTime());
+		cameraObject->GetTransform()->Rotate(right, -Gel::Input::GetMouseOffset(1) * Gel::System::GetDeltaTime());
 		Gel::PhysicsEngine::CheckForCollision();
 	}
 	void OnTerminate() override {

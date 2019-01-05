@@ -6,12 +6,14 @@ namespace Gel {
 	SceneObject::SceneObject(vector<Model*> models, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) {
 		this->transform = Transform(position, rotation, scale);
 		EngineHandler::sceneObjects.push_back(this);
+		renderLayer = RenderLayers::Default;
 	}
 
 	SceneObject::SceneObject(std::string name, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) {
 		this->name = name;
 		this->transform = Transform(position, rotation, scale);
 		EngineHandler::sceneObjects.push_back(this);
+		renderLayer = RenderLayers::Default;
 	}
 
 	void SceneObject::AddComponent(Component* newComponent) {

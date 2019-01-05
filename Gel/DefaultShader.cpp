@@ -72,7 +72,6 @@ namespace Gel {
 		// Delete the shaders as they're linked into our program now and no longer necessery
 		glDeleteShader(vertex);
 		glDeleteShader(fragment);
-		std::cout << "Default Program ID: " << this->Program << std::endl;
 	}
 	void DefaultShader::Use()
 	{

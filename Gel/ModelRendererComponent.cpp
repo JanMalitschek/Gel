@@ -1,4 +1,5 @@
 #include "ModelRendererComponent.h"
+#include "SceneObject.h"
 
 namespace Gel {
 	ModelRendererComponent::ModelRendererComponent(Transform* parentTransform) : Component() {
@@ -11,7 +12,9 @@ namespace Gel {
 	}
 	void ModelRendererComponent::Update() {
 		if (this->isActive) {
-			model.Draw(*this->parentTransform);
+			if (((int)this->sceneObject->renderLayer & RenderSettings::GetRenderLayerFlags()) == (int)this->sceneObject->renderLayer) {
+				model.Draw(*this->parentTransform);
+			}
 		}
 	}
 	void ModelRendererComponent::SetModel(Model model) {

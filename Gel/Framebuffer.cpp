@@ -8,6 +8,7 @@ namespace Gel {
 		textureAttachment = Texture();
 		textureAttachment.Create(RenderSettings::GetScreenWidth(), RenderSettings::GetScreenHeight());
 		glGenFramebuffers(1, &FBO);
+		std::cout << FBO << std::endl;
 		glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureAttachment.id, 0);
 		RBO = Renderbuffer(RenderSettings::GetScreenWidth(), RenderSettings::GetScreenHeight());
@@ -17,6 +18,7 @@ namespace Gel {
 		else
 		{
 			std::cout << "SUCCESS::FRAMEBUFFER:: New Framebuffer is complete" << std::endl;
+			std::cout << "ID: " << textureAttachment.id << std::endl;
 		}
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
@@ -43,11 +45,12 @@ namespace Gel {
 	}
 
 	void Framebuffer::Bind() {
+		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &currentFramebuffer);
 		glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 	}
 
 	void Framebuffer::Unbind() {
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, currentFramebuffer);
 	}
 
 }

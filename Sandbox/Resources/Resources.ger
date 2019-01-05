@@ -23,5 +23,5 @@ InvertColor
 Resources/InvertColor.vert
 Resources/InvertColor.frag
 Pixelate
-Resources/InvertColor.vert
+Resources/Pixelate.vert
 Resources/Pixelate.frag

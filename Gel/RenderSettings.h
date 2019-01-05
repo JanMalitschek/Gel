@@ -34,6 +34,16 @@ namespace Gel {
 		BlendMode_Default
 	};
 
+	enum RenderLayers {
+		Default = 1,
+		LayerA = 2,
+		LayerB = 4,
+		LayerC = 8,
+		LayerD = 16,
+		LayerE = 32,
+		LayerF = 64
+	};
+
 	struct GEL_API DirectionalLight {
 		DirectionalLight(glm::vec3 direction, float intensity, glm::vec3 color) {
 			Direction = direction;
@@ -69,6 +79,7 @@ namespace Gel {
 		static RenderMode GetRenderMode();
 		static CullingMode GetCullingMode();
 		static DepthTestMode GetDepthTestMode();
+		static unsigned int GetRenderLayerFlags();
 		static AmbientLight GetAmbientLight();
 		static DirectionalLight GetDirectionalLight();
 		static float GetNearPlane();
@@ -90,6 +101,7 @@ namespace Gel {
 		static void SetDepthTestMode(DepthTestMode depthTestMode);
 		static void RestoreDepthTestMode();
 		static void SetBlendMode(BlendMode blendMode);
+		static void SetRenderLayerFlags(unsigned int renderLayerFlags);
 		static void RestoreBlendMode();
 		static void EnableBlending(bool enabled);
 		static void SetClearColor(glm::vec4 clearColor);
@@ -123,6 +135,7 @@ namespace Gel {
 		static CullingMode cullingMode;
 		static DepthTestMode depthTestMode;
 		static BlendMode blendMode;
+		static unsigned int renderLayerFlags;
 
 		static glm::vec4 clearColor;
 

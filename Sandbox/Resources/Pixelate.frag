@@ -12,5 +12,5 @@ void main()
 	tempCords.x = floor(tempCords.x * 64) / 64;
 	tempCords.y = floor(tempCords.y * 64) / 64;
 	vec4 screenColor = texture(Gel_ScreenTexture, tempCords);
-	color = vec4(1 - screenColor.x, 1 - screenColor.y, 1 - screenColor.z, 1.0);
+	color = vec4(screenColor.x, screenColor.y, screenColor.z, 1.0);
 }

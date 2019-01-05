@@ -14,8 +14,11 @@ namespace Gel {
 		void BeginCapture();
 		void EndCapture();
 		void PassScreenTexture(int index);
+		void SetActive(bool active);
+		bool IsActive();
 	protected:
 		Shader* shader;
+		bool isActive;
 	private:
 		Framebuffer framebuffer;
 	};

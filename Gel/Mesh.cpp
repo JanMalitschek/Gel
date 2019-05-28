@@ -2,6 +2,20 @@
 
 namespace Gel {
 
+	Mesh::Mesh() {
+		this->vertices = vector<Vertex>();
+		this->indices = vector<GLuint>();
+		this->SetupMesh();
+	}
+
+	Mesh::Mesh(unsigned int maxNumVertices, unsigned int maxNumIndices) {
+		this->vertices = vector<Vertex>(maxNumVertices);
+		this->indices = vector<GLuint>(maxNumIndices);
+		this->SetupMesh();
+		std::vector<Gel::Vertex>().swap(this->vertices);
+		std::vector<GLuint>().swap(this->indices);
+	}
+
 	Mesh::Mesh(vector<Vertex> vertices, vector<GLuint> indices) {
 
 		this->vertices = vertices;
@@ -58,12 +72,29 @@ namespace Gel {
 			std::cout << "Invalid Vertex Index!" << std::endl;
 	}
 
+	void Mesh::SetVertices(vector<Vertex> vertices) {
+		this->vertices = vertices;
+	}
+
+	void Mesh::SetIndices(vector<GLuint> indices) {
+		this->indices = indices;
+	}
+
 	void Mesh::UpdateMesh() {
 		glBindVertexArray(this->VAO);
 		glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, this->vertices.size() * sizeof(Vertex), &this->vertices[0]);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
 		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, this->indices.size() * sizeof(GLuint), &this->indices[0]);
+		glBindVertexArray(0);
+	}
+
+	void Mesh::ReallocateMesh() {
+		glBindVertexArray(this->VAO);
+		glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
+		glBufferData(GL_ARRAY_BUFFER, this->vertices.size() * sizeof(Vertex), &this->vertices[0], GL_DYNAMIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indices.size() * sizeof(GLuint), &this->indices[0], GL_DYNAMIC_DRAW);
 		glBindVertexArray(0);
 	}
 

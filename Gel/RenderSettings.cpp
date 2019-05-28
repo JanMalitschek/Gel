@@ -1,5 +1,6 @@
 #include "RenderSettings.h"
 #include <soil\SOIL.h>
+#include "EngineHandler.h"
 
 namespace Gel {
 
@@ -116,24 +117,72 @@ namespace Gel {
 	//Setter
 	void RenderSettings::SetScreenHeight(int height) {
 		screenHeight = height;
+		glViewportWidth = screenWidth;
+		glViewportHeight = screenHeight;
 		CalculateAspectRatio();
+		if (!runningInFullscreen) {
+			glViewport(glViewportPositionX, glViewportPositionY, glViewportWidth, glViewportHeight);
+			glfwSetWindowSize(EngineHandler::window, screenWidth, screenHeight);
+		}
+		else
+		{
+			//RenderSettings::glViewportWidth = videoMode->width;
+			//RenderSettings::glViewportHeight = videoMode->height;
+			//glViewport(glViewportPositionX, glViewportPositionY, videoMode->width, videoMode->height);
+		}
 	}
 
 	void RenderSettings::SetScreenWidth(int width) {
 		screenWidth = width;
+		glViewportWidth = screenWidth;
+		glViewportHeight = screenHeight;
 		CalculateAspectRatio();
+		if (!runningInFullscreen) {
+			glViewport(glViewportPositionX, glViewportPositionY, glViewportWidth, glViewportHeight);
+			glfwSetWindowSize(EngineHandler::window, screenWidth, screenHeight);
+		}
+		else
+		{
+			//RenderSettings::glViewportWidth = videoMode->width;
+			//RenderSettings::glViewportHeight = videoMode->height;
+			//glViewport(glViewportPositionX, glViewportPositionY, videoMode->width, videoMode->height);
+		}
 	}
 
 	void RenderSettings::SetScreenDimensions(glm::ivec2 dimensions) {
 		screenWidth = dimensions.x;
 		screenHeight = dimensions.y;
+		glViewportWidth = screenWidth;
+		glViewportHeight = screenHeight;
 		CalculateAspectRatio();
+		if (!runningInFullscreen) {
+			glViewport(glViewportPositionX, glViewportPositionY, glViewportWidth, glViewportHeight);
+			glfwSetWindowSize(EngineHandler::window, screenWidth, screenHeight);
+		}
+		else
+		{
+			//RenderSettings::glViewportWidth = videoMode->width;
+			//RenderSettings::glViewportHeight = videoMode->height;
+			//glViewport(glViewportPositionX, glViewportPositionY, videoMode->width, videoMode->height);
+		}
 	}
 
 	void RenderSettings::SetScreenDimensions(int width, int height) {
 		screenWidth = width;
 		screenHeight = height;
+		glViewportWidth = screenWidth;
+		glViewportHeight = screenHeight;
 		CalculateAspectRatio();
+		if (!runningInFullscreen) {
+			glViewport(glViewportPositionX, glViewportPositionY, glViewportWidth, glViewportHeight);
+			glfwSetWindowSize(EngineHandler::window, screenWidth, screenHeight);
+		}
+		else
+		{
+			//RenderSettings::glViewportWidth = videoMode->width;
+			//RenderSettings::glViewportHeight = videoMode->height;
+			//glViewport(glViewportPositionX, glViewportPositionY, videoMode->width, videoMode->height);
+		}
 	}
 
 	void RenderSettings::SetFieldOfView(GLfloat fieldofview) {

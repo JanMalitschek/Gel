@@ -1,4 +1,6 @@
 #include "ResourceManager.h"
+#include <rapidxml/rapidxml.hpp>
+using namespace rapidxml;
 
 namespace Gel {
 
@@ -6,6 +8,78 @@ namespace Gel {
 	ResourceLoadingMode ResourceManager::loadingMode = ResourceLoadingMode::Load_Textures;
 	unsigned long ResourceManager::wrapMode = 0;
 	unsigned long ResourceManager::filterMode = 0;
+
+	bool ResourceManager::LoadResources(const char* resourceXMLFilePath) {
+		std::string xml;
+		std::ifstream xmlFile;
+		xmlFile.exceptions(std::ifstream::badbit);
+		try {
+			xmlFile.open(resourceXMLFilePath);
+			std::stringstream xmlStream;
+			xmlStream << xmlFile.rdbuf();
+			xmlFile.close();
+			xml = xmlStream.str();
+		}
+		catch (std::ifstream::failure e) {
+			printf("Resource File could not be read!");
+			return false;
+		}
+
+		xml_document<> doc;
+		doc.parse<0>((char*)xml.c_str());
+		xml_node<>* rootNode = doc.first_node("Resources");
+		if (!rootNode) {
+			printf("Resources file has incorrect format!");
+			return false;
+		}
+		else {
+			xml_node<>* texturesNode = rootNode->first_node("Textures");
+			if (texturesNode) {
+				for (xml_node<>* node = texturesNode->first_node("Texture"); node; node = node->next_sibling()) {
+					std::string name = node->first_attribute("name")->value();
+					const char* path = node->first_attribute("path")->value();
+					std::string wrap = node->first_attribute("wrap")->value();
+					std::string filter = node->first_attribute("filter")->value();
+
+					if (wrap == "clamp")
+						wrapMode = GL_CLAMP;
+					else if (wrap == "repeat")
+						wrapMode = GL_REPEAT;
+					else
+						wrapMode = GL_REPEAT;
+					if (filter == "nearest")
+						filterMode = GL_NEAREST;
+					else if (filter == "linear")
+						filterMode = GL_LINEAR;
+					else
+						filterMode = GL_LINEAR;
+
+					TextureContainer::LoadTexture(path, name, wrapMode, wrapMode, filterMode, filterMode);
+				}
+			}
+			xml_node<>* modelsNode = rootNode->first_node("Models");
+			if (modelsNode) {
+				for (xml_node<>* node = modelsNode->first_node("Model"); node; node = node->next_sibling()) {
+					std::string name = node->first_attribute("name")->value();
+					GLchar* path = node->first_attribute("path")->value();
+
+					ModelContainer::LoadModel(name, path);
+				}
+			}
+			xml_node<>* shadersNode = rootNode->first_node("Shaders");
+			if (shadersNode) {
+				for (xml_node<>* node = shadersNode->first_node("Shader"); node; node = node->next_sibling()) {
+					std::string name = node->first_attribute("name")->value();
+					GLchar* vertexPath = node->first_attribute("vertex")->value();
+					GLchar* fragmentPath = node->first_attribute("fragment")->value();
+
+					ShaderContainer::LoadShader(new Shader(name, vertexPath, fragmentPath));
+				}
+			}
+		}
+
+		return true;
+	}
 
 	void ResourceManager::UnpackResources(const char* resourceFilePath) {
 		std::cout << "Unpacking Resources..." << std::endl;
@@ -24,6 +98,7 @@ namespace Gel {
 			file.close();
 			return;
 		}
+
 		for (int i = 0; i < resourceData.size(); i++) {
 			if (resourceData[i] == "#Tex") {
 				loadingMode = ResourceLoadingMode::Load_Textures;

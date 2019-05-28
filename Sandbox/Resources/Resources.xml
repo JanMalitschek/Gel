@@ -1,0 +1,16 @@
+<Resources>
+  <Textures>
+    <Texture name="Default_Pattern" path="Resources/Default_Pattern.png" wrap="clamp" filter="nearest" />
+    <Texture name="Shotgun" path="Resources/Shotgun.png" wrap="clamp" filter="nearest" />
+  </Textures>
+  <Models>
+    <Model name="Sample_Floor" path="Resources/Sample_Floor.fbx" />
+    <Model name="Sample_Cube" path="Resources/Sample_Cube.fbx" />
+    <Model name="Shotgun" path="Resources/Shotgun.fbx" />
+  </Models>
+  <Shaders>
+    <Shader name="Unlit" vertex="Resources/Unlit.vert" fragment="Resources/Unlit.frag" />
+    <Shader name="InvertColor" vertex="Resources/InvertColor.vert" fragment="Resources/InvertColor.frag" />
+    <Shader name="Pixelate" vertex="Resources/Pixelate.vert" fragment="Resources/Pixelate.frag" />
+  </Shaders>
+</Resources>

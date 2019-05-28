@@ -15,7 +15,6 @@ namespace Gel {
 	}
 
 	void Application::Run() {
-		EngineHandler::InitEngine();
 		PhysicsEngine::Init();
 		OnStart();
 		while (!glfwWindowShouldClose(EngineHandler::window)) {

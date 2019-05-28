@@ -106,4 +106,11 @@ namespace Gel {
 	void Transform::Scale(float x, float y, float z) {
 		this->scale += glm::vec3(x, y, z);
 	}
+	void Transform::LookAt(glm::vec3 target, glm::vec3 up)
+	{
+		this->rotation = glm::toQuat(glm::transpose(glm::lookAt(this->position, target, up)));
+		this->forward = this->rotation * glm::vec3(0.0f, 0.0f, 1.0f);
+		this->up = this->rotation * glm::vec3(0.0f, 1.0f, 0.0f);
+		this->right = this->rotation * glm::vec3(1.0f, 0.0f, 0.0f);
+	}
 }

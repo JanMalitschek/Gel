@@ -3,10 +3,14 @@
 namespace Gel {
 
 	Model::Model() {
-
+		this->meshes = vector<Gel::Mesh>();
+		this->materials = vector<Gel::Material*>();
+		this->isSetup = false;
 	};
 	Model::Model(GLchar* path)
 	{
+		this->meshes = vector<Gel::Mesh>();
+		this->materials = vector<Gel::Material*>();
 		this->loadModel(path);
 		for (int i = 0; i < this->meshes.size(); i++) {
 			this->materials.push_back(new Material());
@@ -14,6 +18,8 @@ namespace Gel {
 	}
 	Model::Model(string name, GLchar* path)
 	{
+		this->meshes = vector<Gel::Mesh>();
+		this->materials = vector<Gel::Material*>();
 		this->name = name;
 		this->loadModel(path);
 		for (int i = 0; i < this->meshes.size(); i++) {
@@ -54,6 +60,31 @@ namespace Gel {
 			}
 		}
 	}
+	void Model::AddMaterial(Material* material) {
+		this->materials.push_back(material);
+		if (this->materials.size() == this->meshes.size())
+			this->isSetup = true;
+		else
+			this->isSetup = false;
+	}
+
+	void Model::AddMesh(Mesh mesh) {
+		this->meshes.push_back(mesh);
+		if (this->materials.size() == this->meshes.size())
+			this->isSetup = true;
+		else
+			this->isSetup = false;
+	}
+	void Model::SetMesh(int index, Mesh mesh) {
+		if (index >= 0 && index < this->meshes.size()) {
+			this->meshes[index] = mesh;
+		}
+		if (this->materials.size() == this->meshes.size())
+			this->isSetup = true;
+		else
+			this->isSetup = false;
+	}
+
 	void Model::Draw(Transform transform)
 	{
 		if (isSetup) {

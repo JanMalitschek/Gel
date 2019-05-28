@@ -75,4 +75,8 @@ namespace Gel{
 		}
 	}
 
+	btVector3 PhysicsEngine::glmToBt(glm::vec3 vec) {
+		return btVector3(vec.x, vec.y, vec.z);
+	}
+
 }

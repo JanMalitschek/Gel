@@ -42,24 +42,26 @@ namespace Gel {
 
 	void PostProcessingStack::Process()
 	{
-		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &currentFramebuffer);
-		for (int i = 0; i < this->effects.size(); i++) {
-			if (i + 1 < this->effects.size()) {
-				this->effects[i + 1]->BeginCapture();
-				this->effects[i]->Use();
-				this->effects[i]->PassScreenTexture(0);
-				glBindVertexArray(this->VAO);
-				glDrawArrays(GL_TRIANGLES, 0, 6);
-				glBindVertexArray(0);
-				this->effects[i + 1]->EndCapture();
-			}
-			else {
-				glBindFramebuffer(GL_FRAMEBUFFER, 0);
-				this->effects[i]->Use();
-				this->effects[i]->PassScreenTexture(0);
-				glBindVertexArray(this->VAO);
-				glDrawArrays(GL_TRIANGLES, 0, 6);
-				glBindVertexArray(0);
+		if (this->effects.size() > 0) {
+			glGetIntegerv(GL_FRAMEBUFFER_BINDING, &currentFramebuffer);
+			for (int i = 0; i < this->effects.size(); i++) {
+				if (i + 1 < this->effects.size()) {
+					this->effects[i + 1]->BeginCapture();
+					this->effects[i]->Use();
+					this->effects[i]->PassScreenTexture(0);
+					glBindVertexArray(this->VAO);
+					glDrawArrays(GL_TRIANGLES, 0, 6);
+					glBindVertexArray(0);
+					this->effects[i + 1]->EndCapture();
+				}
+				else {
+					glBindFramebuffer(GL_FRAMEBUFFER, 0);
+					this->effects[i]->Use();
+					this->effects[i]->PassScreenTexture(0);
+					glBindVertexArray(this->VAO);
+					glDrawArrays(GL_TRIANGLES, 0, 6);
+					glBindVertexArray(0);
+				}
 			}
 		}
 	}

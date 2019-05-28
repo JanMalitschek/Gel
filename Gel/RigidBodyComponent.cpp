@@ -2,7 +2,7 @@
 
 namespace Gel {
 
-	RigidBodyComponent::RigidBodyComponent(Transform* parentTransform, BodyType type, float mass)
+	RigidBodyComponent::RigidBodyComponent(Transform* parentTransform, BodyType type, float mass, Gel::Mesh mesh)
 	{
 		this->parentTransform = parentTransform;
 		this->isActive = true;
@@ -10,13 +10,14 @@ namespace Gel {
 		this->mass = mass;
 		this->colliding = false;
 		this->collisionEnter = false;
-		SetUpRigidBody();
 		OnCollisionEnterCallback = nullptr;
 		OnCollisionStayCallback = nullptr;
 		OnCollisionExitCallback = nullptr;
 		currentOther = nullptr;
 		this->isStatic = false;
 		this->isTrigger = false;
+		this->mesh = mesh;
+		SetUpRigidBody();
 	}
 
 	RigidBodyComponent::RigidBodyComponent()
@@ -98,6 +99,44 @@ namespace Gel {
 			capsuleShape->setMargin(0.04f);
 			this->body = new btRigidBody(this->mass, motionState, capsuleShape, inertia);
 			break;
+		case BodyType::TriangleMesh:
+			this->mass = 0.0f;
+			if (this->mesh.vertices.size() > 0) {
+				btTriangleMesh* trimesh = new btTriangleMesh();
+				for (int i = 0; i < this->mesh.indices.size(); i+=3) {
+					trimesh->addTriangle(PhysicsEngine::glmToBt(this->mesh.vertices[this->mesh.indices[i]].Position),
+										 PhysicsEngine::glmToBt(this->mesh.vertices[this->mesh.indices[i + 1]].Position),
+										 PhysicsEngine::glmToBt(this->mesh.vertices[this->mesh.indices[i + 2]].Position));
+				}
+				meshShape = new btBvhTriangleMeshShape(trimesh, false);
+				meshShape->calculateLocalInertia(this->mass, inertia);
+				meshShape->setMargin(0.04f);
+				this->body = new btRigidBody(this->mass, motionState, meshShape, inertia);
+			}
+			else {
+				printf("No Mesh Provided!");
+				sphereShape->calculateLocalInertia(this->mass, inertia);
+				sphereShape->setMargin(0.04f);
+				this->body = new btRigidBody(this->mass, motionState, sphereShape, inertia);
+			}
+			break;
+		case BodyType::ConvexHull:
+			if (this->mesh.vertices.size() > 0) {
+				btConvexHullShape* hull = new btConvexHullShape();
+				for (int i = 0; i < this->mesh.vertices.size(); i++) {
+					hull->addPoint(PhysicsEngine::glmToBt(this->mesh.vertices[i].Position));
+				}
+				hull->calculateLocalInertia(this->mass, inertia);
+				hull->setMargin(0.04f);
+				this->body = new btRigidBody(this->mass, motionState, hull, inertia);
+			}
+			else {
+				printf("No Mesh Provided!");
+				sphereShape->calculateLocalInertia(this->mass, inertia);
+				sphereShape->setMargin(0.04f);
+				this->body = new btRigidBody(this->mass, motionState, sphereShape, inertia);
+			}
+			break;
 		default:
 			break;
 		}
@@ -130,6 +169,21 @@ namespace Gel {
 			this->body->setCollisionShape(new btCapsuleShape(radius, height));
 			this->body->getCollisionShape()->setMargin(0.04f);
 		}
+	}
+
+	void RigidBodyComponent::SetBounciness(btScalar bounciness)
+	{
+		this->body->setRestitution(bounciness);
+	}
+
+	void RigidBodyComponent::SetFriction(btScalar friction)
+	{
+		this->body->setFriction(friction);
+	}
+
+	void RigidBodyComponent::SetRollingFriction(btScalar rollingFriction)
+	{
+		this->body->setRollingFriction(rollingFriction);
 	}
 
 	void RigidBodyComponent::AddForce(glm::vec3 force, ForceType forceType) {

@@ -3,9 +3,9 @@
 
 namespace Gel {
 
-	PostProcessingEffect::PostProcessingEffect()
+	PostProcessingEffect::PostProcessingEffect(GLuint filter)
 	{
-		this->framebuffer = Framebuffer(RenderSettings::GetScreenWidth(), RenderSettings::GetScreenHeight());
+		this->framebuffer = Framebuffer(RenderSettings::GetScreenWidth(), RenderSettings::GetScreenHeight(), filter);
 		this->isActive = true;
 	}
 

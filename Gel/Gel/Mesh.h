@@ -54,7 +54,6 @@ namespace Gel {
 		void SetVertices(vector<Vertex> vertices);
 		void SetIndices(vector<GLuint> indices);
 
-
 	private:
 		GLuint VAO, VBO, EBO;
 		void SetupMesh();

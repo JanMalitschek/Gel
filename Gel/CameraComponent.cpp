@@ -15,10 +15,10 @@ namespace Gel {
 		if (this->isActive) {
 
 			Camera::SetPosition(parentTransform->position);
-			Camera::SetFront(parentTransform->forward);
+			Camera::SetFront(-parentTransform->forward);
 			Camera::SetUp(parentTransform->up);
-			Camera::SetRight(parentTransform->right);
-			Camera::SetView(parentTransform->position, parentTransform->forward, parentTransform->up);
+			Camera::SetRight(-parentTransform->right);
+			Camera::SetView(parentTransform->position, -parentTransform->forward, parentTransform->up);
 		}
 	}
 	void CameraComponent::SetClearColor(glm::vec4 color) {

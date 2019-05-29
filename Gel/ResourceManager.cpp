@@ -76,6 +76,32 @@ namespace Gel {
 					ShaderContainer::LoadShader(new Shader(name, vertexPath, fragmentPath));
 				}
 			}
+			xml_node<>* materialsNode = rootNode->first_node("Materials");
+			if (materialsNode) {
+				for (xml_node<>* node = materialsNode->first_node("Material"); node; node = node->next_sibling()) {
+					Gel::Material* mat = new Gel::Material();
+					mat->name = std::string(node->first_attribute("name")->value());
+					mat->SetShader(ShaderContainer::GetShader(std::string(node->first_attribute("shader")->value())));
+					xml_node<>* texUnisNode = node->first_node("Textures");
+					for (xml_node<>* texUni = texUnisNode->first_node("Texture"); texUni; texUni = texUni->next_sibling()) {
+						Gel::Material::TextureUniform uniform = Gel::Material::TextureUniform();
+						uniform.uniformName = texUni->first_attribute("uniform")->value();
+						uniform.id = TextureContainer::GetTexture(std::string(texUni->first_attribute("texture")->value()));
+						mat->textures.push_back(uniform);
+					}
+					xml_node<>* colUnisNode = node->first_node("Colors");
+					for (xml_node<>* colUni = colUnisNode->first_node("Color"); colUni; colUni = colUni->next_sibling()) {
+						Gel::Material::ColorUniform uniform = Gel::Material::ColorUniform();
+						uniform.uniformName = colUni->first_attribute("uniform")->value();
+						uniform.col.r = std::stof(std::string(colUni->first_attribute("r")->value()));
+						uniform.col.g = std::stof(std::string(colUni->first_attribute("g")->value()));
+						uniform.col.b = std::stof(std::string(colUni->first_attribute("b")->value()));
+						uniform.col.a = std::stof(std::string(colUni->first_attribute("a")->value()));
+						mat->colors.push_back(uniform);
+					}
+					MaterialContainer::AddMaterial(mat);
+				}
+			}
 		}
 
 		return true;

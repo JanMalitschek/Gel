@@ -160,6 +160,7 @@
     <ClInclude Include="Gel.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="MaterialContainer.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelContainer.h" />
@@ -189,6 +190,7 @@
     <ClCompile Include="Framebuffer.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="MaterialContainer.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelContainer.cpp" />

@@ -52,12 +52,7 @@ namespace Gel {
 	}
 	void Model::SetMaterial(int index, Material* material) {
 		if (index >= 0 && index < this->materials.size()) {
-			if (material != nullptr) {
 				this->materials[index] = material;
-			}
-			else {
-				this->materials[index] = new Material();
-			}
 		}
 	}
 	void Model::AddMaterial(Material* material) {

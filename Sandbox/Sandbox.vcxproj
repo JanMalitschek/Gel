@@ -152,6 +152,10 @@
   <ItemGroup>
     <Xml Include="Resources\Resources.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Unlit.frag" />
+    <None Include="Resources\Unlit.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

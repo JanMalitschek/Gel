@@ -6,10 +6,19 @@ namespace Gel {
 	{
 		shader = nullptr;
 		defaultShader = DefaultShader();
+		textures = std::vector<TextureUniform>();
+		colors = std::vector<ColorUniform>();
 	}
 
 	void Material::PassValues() {
-
+		for (int i = 0; i < textures.size(); i++) {
+			glActiveTexture(GL_TEXTURE0 + i);
+			glBindTexture(GL_TEXTURE_2D, textures[i].id);
+			glUniform1i(glGetUniformLocation(GetProgram(), textures[i].uniformName.c_str()), i);
+		}
+		for (int i = 0; i < colors.size(); i++) {
+			glUniform4f(glGetUniformLocation(GetProgram(), colors[i].uniformName.c_str()), colors[i].col.r, colors[i].col.g, colors[i].col.b, colors[i].col.a);
+		}
 	}
 
 	void Material::SetShader(Shader* shader) {

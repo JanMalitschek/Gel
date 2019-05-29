@@ -105,6 +105,9 @@
     <ClInclude Include="PostProcessingEffect.h">
       <Filter>src\Gel</Filter>
     </ClInclude>
+    <ClInclude Include="MaterialContainer.h">
+      <Filter>src\Gel\ResourceClasses</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -187,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="PostProcessingEffect.cpp">
       <Filter>src\Gel</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialContainer.cpp">
+      <Filter>src\Gel\ResourceClasses</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

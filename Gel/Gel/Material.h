@@ -16,6 +16,7 @@
 
 #include "Shader.h"
 #include "DefaultShader.h"
+#include "Texture.h"
 
 namespace Gel {
 
@@ -27,6 +28,28 @@ namespace Gel {
 		void UseShader();
 		GLuint GetProgram();
 		Shader* shader;
+
+		std::string name;
+
+		//Params
+		struct TextureUniform {
+			GLuint id;
+			std::string uniformName;
+			TextureUniform() {
+				id = 0;
+				uniformName = "";
+			}
+		};
+		std::vector<TextureUniform> textures;
+		struct ColorUniform {
+			glm::vec4 col;
+			std::string uniformName;
+			ColorUniform() {
+				col = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+				uniformName = "";
+			}
+		};
+		std::vector<ColorUniform> colors;
 	private:
 		DefaultShader defaultShader;
 	protected:

@@ -70,6 +70,7 @@ namespace Gel {
 		void ResetTransform();
 
 		std::string name;
+		std::string tag;
 
 		RenderLayers renderLayer;
 

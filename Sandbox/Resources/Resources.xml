@@ -13,4 +13,22 @@
     <Shader name="InvertColor" vertex="Resources/InvertColor.vert" fragment="Resources/InvertColor.frag" />
     <Shader name="Pixelate" vertex="Resources/Pixelate.vert" fragment="Resources/Pixelate.frag" />
   </Shaders>
+  <Materials>
+    <Material name="Unlit" shader="Unlit">
+      <Textures>
+        <Texture uniform="tex" texture="Default_Pattern" />
+      </Textures>
+      <Colors>
+        <Color uniform="col" r="0.3" g="1.0" b="0.0" a="1.0" />
+      </Colors>
+    </Material>
+    <Material name="Shotgun" shader="Unlit">
+      <Textures>
+        <Texture uniform="tex" texture="Shotgun" />
+      </Textures>
+      <Colors>
+        <Color uniform="col" r="1.0" g="1.0" b="1.0" a="1.0" />
+      </Colors>
+    </Material>
+  </Materials>
 </Resources>

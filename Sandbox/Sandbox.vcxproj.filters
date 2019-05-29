@@ -26,4 +26,12 @@
       <Filter>src</Filter>
     </Xml>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Unlit.frag">
+      <Filter>src</Filter>
+    </None>
+    <None Include="Resources\Unlit.vert">
+      <Filter>src</Filter>
+    </None>
+  </ItemGroup>
 </Project>

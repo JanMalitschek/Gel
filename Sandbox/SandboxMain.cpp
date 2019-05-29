@@ -13,8 +13,6 @@ public:
 	}
 
 	Gel::SceneObject* floorObject;
-	UnlitMaterial* floorMaterial;
-	UnlitMaterial* shotgunMaterial;
 	Gel::SceneObject* cubeObject;
 	Gel::SceneObject* shotgun;
 	Gel::SceneObject* cameraObject;
@@ -25,7 +23,7 @@ public:
 
 	void OnStart() override {
 		Gel::EngineHandler::SetWindowTitle("Test Window");
-		Gel::RenderSettings::SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		Gel::RenderSettings::SetClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 		Gel::ResourceManager::LoadResources("Resources/Resources.xml");
 		Gel::RenderSettings::SetCullingMode(Gel::CullingMode::CullingMode_Back);
 		Gel::RenderSettings::SetDepthTestMode(Gel::DepthTestMode::DepthTest_Enabled);
@@ -33,22 +31,12 @@ public:
 		Gel::Camera::SetPosition(glm::vec3(0.0f, 3.0f, 15.0f));
 		Gel::RenderSettings::SetRenderLayerFlags(Gel::RenderLayers::Default);
 		//Gel::RenderSettings::postProcessingStack.AddEffect(new InvertColorEffect());
-		Gel::RenderSettings::postProcessingStack.AddEffect(new PixelationEffect());
-
-		floorMaterial = new UnlitMaterial();
-		floorMaterial->texture = Gel::TextureContainer::GetTextureData("Default_Pattern");
-		floorMaterial->color = glm::vec3(0.3f, 1.0f, 0.0f);
-		floorMaterial->SetShader(Gel::ShaderContainer::GetShader("Unlit"));
-
-		shotgunMaterial = new UnlitMaterial();
-		shotgunMaterial->texture = Gel::TextureContainer::GetTextureData("Shotgun");
-		shotgunMaterial->color = glm::vec3(1.0f, 1.0f, 1.0f);
-		shotgunMaterial->SetShader(Gel::ShaderContainer::GetShader("Unlit"));
+		//Gel::RenderSettings::postProcessingStack.AddEffect(new PixelationEffect());
 
 		floorObject = new Gel::SceneObject("FloorObject", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 		floorObject->AddComponent(new Gel::ModelRendererComponent(floorObject->GetTransform()));
 		Gel::Model floorModel = Gel::ModelContainer::GetModel("Sample_Floor");
-		floorModel.SetMaterial(0, floorMaterial);
+		floorModel.SetMaterial(0, Gel::MaterialContainer::GetMaterial("Unlit"));
 		floorObject->GetComponent<Gel::ModelRendererComponent>()->SetModel(floorModel);
 		floorObject->AddComponent(new Gel::RigidBodyComponent(floorObject->GetTransform(), Gel::BodyType::Box, 0.0f));
 		floorObject->GetComponent<Gel::RigidBodyComponent>()->SetSize(btVector3(8.0f, 0.01f, 8.0f));
@@ -56,7 +44,7 @@ public:
 		cubeObject = new Gel::SceneObject("CubeObject", glm::vec3(0.0f, 6.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 		cubeObject->AddComponent(new Gel::ModelRendererComponent(cubeObject->GetTransform()));
 		Gel::Model cubeModel = Gel::ModelContainer::GetModel("Sample_Cube");
-		cubeModel.SetMaterial(0, floorMaterial);
+		cubeModel.SetMaterial(0, Gel::MaterialContainer::GetMaterial("Unlit"));
 		cubeObject->GetComponent<Gel::ModelRendererComponent>()->SetModel(cubeModel);
 		cubeObject->AddComponent(new Gel::RigidBodyComponent(cubeObject->GetTransform(), Gel::BodyType::Box, 1.0f));
 		cubeObject->GetComponent<Gel::RigidBodyComponent>()->SetSize(btVector3(2.0f, 2.0f, 2.0f));
@@ -68,7 +56,7 @@ public:
 		shotgun = new Gel::SceneObject("ShotgunObject", glm::vec3(0, 2, 1), glm::vec3(45.0f, 180.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 		shotgun->AddComponent(new Gel::ModelRendererComponent(shotgun->GetTransform()));
 		Gel::Model shotgunModel = Gel::ModelContainer::GetModel("Shotgun");
-		shotgunModel.SetMaterial(0, shotgunMaterial);
+		shotgunModel.SetMaterial(0, Gel::MaterialContainer::GetMaterial("Shotgun"));
 		shotgun->GetComponent<Gel::ModelRendererComponent>()->SetModel(shotgunModel);
 		shotgun->AddComponent(new Gel::RigidBodyComponent(shotgun->GetTransform(), Gel::BodyType::ConvexHull, 1.0f, shotgunModel.meshes[0]));
 		
@@ -98,12 +86,9 @@ public:
 		cameraObject->GetTransform()->Rotate(right, -Gel::Input::GetMouseOffset(1) * -Gel::System::GetDeltaTime() * 0.3f);
 		//cameraObject->GetTransform()->LookAt(cubeObject->GetTransform()->position, glm::vec3(0.0f, 1.0f, 0.0f));
 		Gel::PhysicsEngine::CheckForCollision();
-		std::cout << shotgun->GetTransform()->rotation.x << std::endl;
 	}
 	void OnTerminate() override {
 		delete floorObject;
-		delete floorMaterial;
-		delete shotgunMaterial;
 		delete cubeObject;
 		delete shotgun;
 		delete cameraObject;

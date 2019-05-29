@@ -8,6 +8,7 @@ namespace Gel {
 		EngineHandler::sceneObjects.push_back(this);
 		renderLayer = RenderLayers::Default;
 		this->components = vector<Gel::Component*>();
+		this->tag = "";
 	}
 
 	SceneObject::SceneObject(vector<Model*> models, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) {
@@ -15,6 +16,7 @@ namespace Gel {
 		EngineHandler::sceneObjects.push_back(this);
 		renderLayer = RenderLayers::Default;
 		this->components = vector<Gel::Component*>();
+		this->tag = "";
 	}
 
 	SceneObject::SceneObject(std::string name, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) {
@@ -23,6 +25,7 @@ namespace Gel {
 		EngineHandler::sceneObjects.push_back(this);
 		renderLayer = RenderLayers::Default;
 		this->components = vector<Gel::Component*>();
+		this->tag = "";
 	}
 
 	void SceneObject::AddComponent(Component* newComponent) {

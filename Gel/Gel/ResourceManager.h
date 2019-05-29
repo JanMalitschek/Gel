@@ -13,6 +13,7 @@
 #include "TextureContainer.h"
 #include "ModelContainer.h"
 #include "ShaderContainer.h"
+#include "MaterialContainer.h"
 
 namespace Gel {
 
